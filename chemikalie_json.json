@@ -1,0 +1,23 @@
+{
+  "Chemikalie": [
+    {
+      "nazev": "Zkušební chemikálie",
+      "vzorec": "C2",
+      "trivialne": "-",
+      "mnozstvi": "123",
+      "jednotka": "g",
+      "cistota": "yees",
+      "explosive": "0",
+      "flammable": "0",
+      "oxidising": "0",
+      "gasunderpressure": "0",
+      "corrosive": "0",
+      "toxicity": "0",
+      "health": "0",
+      "chronichealth": "0",
+      "environmental": "0",
+      "poznamka": "",
+      "vyloucit": "0"
+    }
+  ]
+}

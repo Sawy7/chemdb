@@ -1,0 +1,1179 @@
+{
+  "Statements": [
+    {
+			"code": "H220",
+			"phrase": "Extrémně hořlavý plyn.",
+      "pictogram": "flammable"
+		},
+		{
+			"code": "H221",
+			"phrase": "Hořlavý plyn."
+		},
+		{
+			"code": "H222",
+			"phrase": "Extrémně hořlavý aerosol.",
+      "pictogram": "flamable"
+		},
+		{
+			"code": "H223",
+			"phrase": "Hořlavý aerosol.",
+      "pictogram": "flammable"
+		},
+		{
+			"code": "H224",
+			"phrase": "Extrémně hořlavá kapalina a páry.",
+      "pictogram": "flammable"
+		},
+		{
+			"code": "H225",
+			"phrase": "Vysoce hořlavá kapalina a páry.",
+      "pictogram": "flammable"
+		},
+		{
+			"code": "H226",
+			"phrase": "Hořlavá kapalina a páry.",
+      "pictogram": "flammable"
+		},
+		{
+			"code": "H227",
+			"phrase": "Hořlavá kapalina."
+		},
+		{
+			"code": "H228",
+			"phrase": "Hořlavá tuhá látka.",
+      "pictogram": "flammable"
+		},
+		{
+			"code": "H229",
+			"phrase": "Nádoba je pod tlakem: při zahřívání se může roztrhnout"
+		},
+		{
+			"code": "H230",
+			"phrase": "Může reagovat výbušně i bez přítomnosti vzduchu."
+		},
+		{
+			"code": "H231",
+			"phrase": "Při zvýšeném tlaku a/nebo teplotě může reagovat výbušně i bez přítomnosti vzduchu."
+		},
+		{
+			"code": "H240",
+			"phrase": "Zahřívání může způsobit výbuch.",
+      "pictogram": "explosive"
+		},
+		{
+			"code": "H241",
+			"phrase": "Zahřívání může způsobit požár nebo výbuch.",
+      "pictogram": "explosive_flammable"
+		},
+		{
+			"code": "H242",
+			"phrase": "Zahřívání může způsobit požár.",
+      "pictogram": "flammable"
+		},
+		{
+			"code": "H250",
+			"phrase": "Při styku se vzduchem se samovolně vznítí.",
+      "pictogram": "flammable"
+		},
+		{
+			"code": "H251",
+			"phrase": "Samovolně se zahřívá: může se vznítit.",
+      "pictogram": "flammable"
+		},
+		{
+			"code": "H252",
+			"phrase": "Ve velkém množství se samovolně zahřívá; může se vznítit.",
+      "pictogram": "flammable"
+		},
+		{
+			"code": "H260",
+			"phrase": "Při styku s vodou uvolňuje hořlavé plyny, které se mohou samovolně vznítit.",
+      "pictogram": "flammable"
+		},
+		{
+			"code": "H261",
+			"phrase": "Při styku s vodou uvolňuje hořlavé plyny.",
+      "pictogram": "flammable"
+		},
+		{
+			"code": "H270",
+			"phrase": "Může způsobit nebo zesílit požár; oxidant.",
+      "pictogram": "oxidising"
+		},
+		{
+			"code": "H271",
+			"phrase": "Může způsobit požár nebo výbuch; silný oxidant.",
+      "pictogram": "oxidising"
+		},
+		{
+			"code": "H272",
+			"phrase": "Může zesílit požár; oxidant.",
+      "pictogram": "oxidising"
+		},
+		{
+			"code": "H280",
+			"phrase": "Obsahuje plyn pod tlakem; při zahřívání může vybuchnout.",
+      "pictogram": "gasunderpressure"
+		},
+		{
+			"code": "H281",
+			"phrase": "Obsahuje zchlazený plyn; může způsobit omrzliny nebo poškození chladem.",
+      "pictogram": "gasunderpressure"
+		},
+		{
+			"code": "H290",
+			"phrase": "Může být korozivní pro kovy.",
+      "pictogram": "corrosive"
+		},
+		{
+			"code": "H300",
+			"phrase": "Při požití může způsobit smrt.",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H300 + H310",
+			"phrase": "Při požití nebo při styku s kůží může způsobit smrt",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H300 + H310 + H330",
+			"phrase": "Při požití, při styku s kůží nebo při vdechování může způsobit smrt",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H300 + H330",
+			"phrase": "Při požití nebo při vdechování může způsobit smrt",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H301",
+			"phrase": "Toxický při požití.",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H301 + H311",
+			"phrase": "Toxický při požití a při styku s kůží",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H301 + H311 + H331",
+			"phrase": "Toxický při požití, při styku s kůží a při vdechování",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H301 + H331",
+			"phrase": "Toxický při požití a při vdechování",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H302",
+			"phrase": "Zdraví škodlivý při požití.",
+      "pictogram": "health"
+		},
+		{
+			"code": "H302 + H312",
+			"phrase": "Zdraví škodlivý při požití a při styku s kůží",
+      "pictogram": "health"
+		},
+		{
+			"code": "H302 + H312 + H332",
+			"phrase": "Zdraví škodlivý při požití, při styku s kůží a při vdechování",
+      "pictogram": "health"
+		},
+		{
+			"code": "H302 + H332",
+			"phrase": "Zdraví škodlivý při požití a při vdechování",
+      "pictogram": "health"
+		},
+		{
+			"code": "H303",
+			"phrase": "Může být zdraví škodlivý při požití."
+		},
+		{
+			"code": "H303 + H313",
+			"phrase": "Může být zdraví škodlivý při požití nebo při styku s kůží."
+		},
+		{
+			"code": "H303 + H313 + H333",
+			"phrase": "Může být zdraví škodlivý při požití, při styku s kůží nebo při vdechování."
+		},
+		{
+			"code": "H303 + H333",
+			"phrase": "Může být zdraví škodlivý při požití nebo při vdechování."
+		},
+		{
+			"code": "H304",
+			"phrase": "Při požití a vniknutí do dýchacích cest může způsobit smrt.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H305",
+			"phrase": "Může být zdraví škodlivý při požití a vniknutí do dýchacích cest."
+		},
+		{
+			"code": "H310",
+			"phrase": "Při styku s kůží může způsobit smrt.",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H310 + H330",
+			"phrase": "Při styku s kůží nebo při vdechování může způsobit smrt",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H311",
+			"phrase": "Toxický při styku s kůží.",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H311 + H331",
+			"phrase": "Toxický při styku s kůží a při vdechování",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H312",
+			"phrase": "Zdraví škodlivý při styku s kůží.",
+      "pictogram": "health"
+		},
+		{
+			"code": "H312 + H332",
+			"phrase": "Zdraví škodlivý při styku s kůží a při vdechování",
+      "pictogram": "health"
+		},
+		{
+			"code": "H313",
+			"phrase": "Může škodit zdraví při styku s pokožkou."
+		},
+		{
+			"code": "H313 + H333",
+			"phrase": "Může být zdraví škodlivý při styku s kůží nebo při vdechování."
+		},
+		{
+			"code": "H314",
+			"phrase": "Způsobuje těžké poleptání kůže a poškození očí.",
+      "pictogram": "corrosive"
+		},
+		{
+			"code": "H315",
+			"phrase": "Dráždí kůži.",
+      "pictogram": "health"
+		},
+		{
+			"code": "H315 + H320",
+			"phrase": "Dráždí oči a kůži.",
+      "pictogram": "health"
+		},
+		{
+			"code": "H316",
+			"phrase": "Mírně dráždí kůži."
+		},
+		{
+			"code": "H317",
+			"phrase": "Může vyvolat alergickou kožní reakci.",
+      "pictogram": "health"
+		},
+		{
+			"code": "H318",
+			"phrase": "Způsobuje vážné poškození očí.",
+      "pictogram": "corrosive"
+		},
+		{
+			"code": "H319",
+			"phrase": "Způsobuje vážné podráždění očí.",
+      "pictogram": "health"
+		},
+		{
+			"code": "H320",
+			"phrase": "Způsobuje podráždění očí."
+		},
+		{
+			"code": "H330",
+			"phrase": "Při vdechování může způsobit smrt.",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H331",
+			"phrase": "Toxický při vdechování.",
+      "pictogram": "toxicity"
+		},
+		{
+			"code": "H332",
+			"phrase": "Zdraví škodlivý při vdechování.",
+      "pictogram": "health"
+		},
+		{
+			"code": "H333",
+			"phrase": "Může být zdraví škodlivý při vdechování."
+		},
+		{
+			"code": "H334",
+			"phrase": "Při vdechování může vyvolat příznaky alergie nebo astmatu nebo dýchací potíže.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H335",
+			"phrase": "Může způsobit podráždění dýchacích cest.",
+      "pictogram": "health"
+		},
+		{
+			"code": "H336",
+			"phrase": "Může způsobit ospalost nebo závratě.",
+      "pictogram": "health"
+		},
+		{
+			"code": "H340",
+			"phrase": "Může vyvolat genetické poškození <uveďte cestu expozice, je-li přesvědčivě prokázáno, že ostatní cesty expozice nejsou nebezpečné>.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H341",
+			"phrase": "Podezření na genetické poškození <uveďte cestu expozice, je-li přesvědčivě prokázáno, že ostatní cesty expozice nejsou nebezpečné>.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H350",
+			"phrase": "Může vyvolat rakovinu <uveďte cestu expozice, je-li přesvědčivě prokázáno, že ostatní cesty expozice nejsou nebezpečné>.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H350i",
+			"phrase": "Může vyvolat rakovinu při vdechování.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "EUH001",
+			"phrase": "Výbušný v suchém stavu."
+		},
+		{
+			"code": "EUH006",
+			"phrase": "Výbušný za přístupu i bez přístupu vzduchu."
+		},
+		{
+			"code": "EUH014",
+			"phrase": "Prudce reaguje s vodou."
+		},
+		{
+			"code": "EUH018",
+			"phrase": "Při používání může vytvářet hořlavé nebo výbušné směsi par se vzduchem."
+		},
+		{
+			"code": "EUH019",
+			"phrase": "Může vytvářet výbušné peroxidy."
+		},
+		{
+			"code": "EUH029",
+			"phrase": "Uvolňuje toxický plyn při styku s vodou."
+		},
+		{
+			"code": "EUH031",
+			"phrase": "Uvolňuje toxický plyn při styku s kyselinami."
+		},
+		{
+			"code": "EUH032",
+			"phrase": "Uvolňuje vysoce toxický plyn při styku s kyselinami."
+		},
+		{
+			"code": "EUH044",
+			"phrase": "Nebezpečí výbuchu při zahřátí v uzavřeném obalu."
+		},
+		{
+			"code": "EUH059",
+			"phrase": "Nebezpečný pro ozonovou vrstvu."
+		},
+		{
+			"code": "EUH066",
+			"phrase": "Opakovaná expozice může způsobit vysušení nebo popraskání kůže."
+		},
+		{
+			"code": "EUH070",
+			"phrase": "Toxický při styku s očima."
+		},
+		{
+			"code": "EUH071",
+			"phrase": "Způsobuje poleptání dýchacích cest."
+		},
+		{
+			"code": "EUH201",
+			"phrase": "Obsahuje olovo. Nemá se používat na povrchy, které mohou okusovat nebo olizovat děti."
+		},
+		{
+			"code": "EUH201A",
+			"phrase": "Pozor! Obsahuje olovo."
+		},
+		{
+			"code": "EUH202",
+			"phrase": "Kyanoakrylát. Nebezpečí. Okamžitě slepuje kůži a oči. Uchovávejte mimo dosah dětí."
+		},
+		{
+			"code": "EUH203",
+			"phrase": "Obsahuje chrom (VI). Může vyvolat alergickou reakci."
+		},
+		{
+			"code": "EUH204",
+			"phrase": "Obsahuje isokyanáty. Může vyvolat alergickou reakci."
+		},
+		{
+			"code": "EUH205",
+			"phrase": "Obsahuje epoxidové složky. Může vyvolat alergickou reakci."
+		},
+		{
+			"code": "EUH206",
+			"phrase": "Pozor! Nepoužívejte společně s jinými výrobky. Může uvolňovat nebezpečné plyny (chlor)."
+		},
+		{
+			"code": "EUH207",
+			"phrase": "Pozor! Obsahuje kadmium. Při používání vznikají nebezpečné výpary. Viz informace dodané výrobcem. Dodržujte bezpečnostní pokyny."
+		},
+		{
+			"code": "EUH208",
+			"phrase": "Obsahuje <název senzibilizující látky>. Může vyvolat alergickou reakci."
+		},
+		{
+			"code": "EUH209",
+			"phrase": "Při používání se může stát vysoce hořlavým."
+		},
+		{
+			"code": "EUH209A",
+			"phrase": "Při používání se může stát hořlavým."
+		},
+		{
+			"code": "EUH210",
+			"phrase": "Na vyžádání je kodispozici bezpečnostní list."
+		},
+		{
+			"code": "EUH401",
+			"phrase": "Dodržujte pokyny pro používání, abyste se vyvarovali rizik pro lidské zdraví a životní prostředí."
+		},
+		{
+			"code": "H200",
+			"phrase": "Nestabilní výbušnina.",
+      "pictogram": "explosive"
+		},
+		{
+			"code": "H201",
+			"phrase": "Výbušnina; nebezpečí masivního výbuchu.",
+      "pictogram": "explosive"
+		},
+		{
+			"code": "H202",
+			"phrase": "Výbušnina; vážné nebezpečí zasažení částicemi.",
+      "pictogram": "explosive"
+		},
+		{
+			"code": "H203",
+			"phrase": "Výbušnina; nebezpečí požáru, tlakové vlny nebo zasažení částicemi.",
+      "pictogram": "explosive"
+		},
+		{
+			"code": "H204",
+			"phrase": "Nebezpečí požáru nebo zasažení částicemi.",
+      "pictogram": "explosive"
+		},
+		{
+			"code": "H205",
+			"phrase": "Při požáru může způsobit masivní výbuch.",
+      "pictogram": "explosive"
+		},
+		{
+			"code": "H351",
+			"phrase": "Podezření na vyvolání rakoviny <uveďte cestu expozice, je-li přesvědčivě prokázáno, že ostatní cesty expozice nejsou nebezpečné>.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H360",
+			"phrase": "Může poškodit reprodukční schopnost nebo plod v těle matky <uveďte specifický účinek, je-li znám> <uveďte cestu expozice, je-li přesvědčivě prokázáno, že ostatní cesty expozice nejsou nebezpečné>.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H360D",
+			"phrase": "Může poškodit plod v těle matky.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H360Df",
+			"phrase": "Může poškodit plod v těle matky. Podezření na poškození reprodukční schopnosti.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H360F",
+			"phrase": "Může poškodit reprodukční schopnost.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H360FD",
+			"phrase": "Může poškodit reprodukční schopnost. Může poško- dit plod v těle matky.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H360Fd",
+			"phrase": "Může poškodit reprodukční schopnost. Podezření na poškození plodu v těle matky.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H361",
+			"phrase": "Podezření na poškození reprodukční schopnosti nebo plodu v těle matky <uveďte specifický účinek, je-li znám> <uveďte cestu expozice, je-li přesvědčivě prokázáno, že ostatní cesty expozice nejsou nebezpečné>.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H361d",
+			"phrase": "Podezření na poškození plodu v těle matky.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H361f",
+			"phrase": "Podezření na poškození reprodukční schopnosti.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H361fd",
+			"phrase": "Podezření na poškození reprodukční schopnosti. Podezření na poškození plodu v těle matky.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H362",
+			"phrase": "Může poškodit kojence prostřednictvím mateřského mléka."
+		},
+		{
+			"code": "H370",
+			"phrase": "Způsobuje poškození orgánů <nebo uvést všechny postižené orgány, jsou-li známy> <uveďte cestu expozice, je-li přesvědčivě prokázáno, že ostatní cesty expozice nejsou nebezpečné>.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H371",
+			"phrase": "Může způsobit poškození orgánů <nebo uvést všechny postižené orgány, jsou-li známy> <uveďte cestu expozice, je-li přesvědčivě prokázáno, že ostatní cesty expozice nejsou nebezpečné>.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H372",
+			"phrase": "Způsobuje poškození orgánů <nebo uvést všechny postižené orgány, jsou-li známy> při prodloužené nebo opakované expozici <uveďte cestu expozice, je-li přesvědčivě prokázáno, že ostatní cesty expozice nejsou nebezpečné>.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H373",
+			"phrase": "Může způsobit poškození orgánů <nebo uvést všechny postižené orgány, jsou-li známy> při prodloužené nebo opakované expozici <uveďte cestu expozice, je-li přesvědčivě prokázáno, že ostatní cesty expozice nejsou nebezpečné>.",
+      "pictogram": "chronichealth"
+		},
+		{
+			"code": "H400",
+			"phrase": "Vysoce toxický pro vodní organismy.",
+      "pictogram": "environmental"
+		},
+		{
+			"code": "H401",
+			"phrase": "Toxický pro vodní organismy."
+		},
+		{
+			"code": "H402",
+			"phrase": "Škodlivý pro vodní organismy."
+		},
+		{
+			"code": "H410",
+			"phrase": "Vysoce toxický pro vodní organismy, s dlouhodobými účinky.",
+      "pictogram": "environmental"
+		},
+		{
+			"code": "H411",
+			"phrase": "Toxický pro vodní organismy, s dlouhodobými účinky.",
+      "pictogram": "environmental"
+		},
+		{
+			"code": "H412",
+			"phrase": "Škodlivý pro vodní organismy, s dlouhodobými účinky."
+		},
+		{
+			"code": "H413",
+			"phrase": "Může vyvolat dlouhodobé škodlivé účinky pro vodní organismy."
+		},
+		{
+			"code": "H420",
+			"phrase": "Poškozuje veřejné zdraví a životní prostředí tím, že ničí ozon ve svrchních vrstvách atmosféry",
+      "pictogram": "health"
+		},
+		{
+			"code": "P101",
+			"phrase": "Je-li nutná lékařská pomoc, mějte po ruce obal nebo štítek výrobku."
+		},
+		{
+			"code": "P102",
+			"phrase": "Uchovávejte mimo dosah dětí."
+		},
+		{
+			"code": "P103",
+			"phrase": "Před použitím si přečtěte údaje na štítku."
+		},
+		{
+			"code": "P201",
+			"phrase": "Před použitím si obstarejte speciální instrukce."
+		},
+		{
+			"code": "P202",
+			"phrase": "Nepoužívejte, dokud jste si nepřečetli všechny bezpečnostní pokyny a neporozuměli jim."
+		},
+		{
+			"code": "P210",
+			"phrase": "Chraňte před teplem, horkými povrchy, jiskrami, otevřeným ohněm a jinými zdroji zapálení. Zákaz kouření."
+		},
+		{
+			"code": "P211",
+			"phrase": "Nestříkejte do otevřeného ohně nebo jiných zdrojů zapálení."
+		},
+		{
+			"code": "P220",
+			"phrase": "Uchovávejte odděleně od oděvů a jiných hořlavých materiálů."
+		},
+		{
+			"code": "P221",
+			"phrase": "Proveďte preventivní opatření proti smíchání s hořlavými materiály..."
+		},
+		{
+			"code": "P222",
+			"phrase": "Zabraňte styku se vzduchem."
+		},
+		{
+			"code": "P223",
+			"phrase": "Zabraňte styku s vodou."
+		},
+		{
+			"code": "P230",
+			"phrase": "Uchovávejte ve zvlhčeném stavu..."
+		},
+		{
+			"code": "P231",
+			"phrase": "Manipulace a skladování pod inertním plynem /…"
+		},
+		{
+			"code": "P231 + P232",
+			"phrase": "Manipulace a skladování pod inertním plynem /…. Chraňte před vlhkem."
+		},
+		{
+			"code": "P232",
+			"phrase": "Chraňte před vlhkem."
+		},
+		{
+			"code": "P233",
+			"phrase": "Uchovávejte obal těsně uzavřený."
+		},
+		{
+			"code": "P234",
+			"phrase": "Uchovávejte pouze v původním balení."
+		},
+		{
+			"code": "P235",
+			"phrase": "Uchovávejte v chladu."
+		},
+		{
+			"code": "P235 + P410",
+			"phrase": "Uchovávejte v chladu. Chraňte před slunečním zářením."
+		},
+		{
+			"code": "P240",
+			"phrase": "Uzemněte a upevněte obal a odběrové zařízení."
+		},
+		{
+			"code": "P241",
+			"phrase": "Používejte [elektrické/ventilační/osvětlovací/…] zařízení do výbušného prostředí."
+		},
+		{
+			"code": "P242",
+			"phrase": "Používejte nářadí z nejiskřícího kovu."
+		},
+		{
+			"code": "P243",
+			"phrase": "Proveďte opatření proti výbojům statické elektřiny."
+		},
+		{
+			"code": "P244",
+			"phrase": "Udržujte ventily i příslušenství čisté — bez olejů a maziv."
+		},
+		{
+			"code": "P250",
+			"phrase": "Nevystavujte obrušování/nárazům/tření/… ."
+		},
+		{
+			"code": "P251",
+			"phrase": "Nepropichujte nebo nespalujte ani po použití."
+		},
+		{
+			"code": "P260",
+			"phrase": "Nevdechujte prach/dým/plyn/mlhu/páry/aerosoly."
+		},
+		{
+			"code": "P261",
+			"phrase": "Zamezte vdechování prachu/dýmu/plynu/mlhy/par/aerosolů."
+		},
+		{
+			"code": "P262",
+			"phrase": "Zabraňte styku s očima, kůží nebo oděvem."
+		},
+		{
+			"code": "P263",
+			"phrase": "Zabraňte styku během těhotenství a kojení."
+		},
+		{
+			"code": "P264",
+			"phrase": "Po manipulaci důkladně omyjte ..."
+		},
+		{
+			"code": "P270",
+			"phrase": "Při používání tohoto výrobku nejezte, nepijte ani nekuřte."
+		},
+		{
+			"code": "P271",
+			"phrase": "Používejte pouze venku nebo v dobře větraných prostorách."
+		},
+		{
+			"code": "P272",
+			"phrase": "Kontaminovaný pracovní oděv neodnášejte z pracoviště."
+		},
+		{
+			"code": "P273",
+			"phrase": "Zabraňte uvolnění do životního prostředí."
+		},
+		{
+			"code": "P280",
+			"phrase": "Používejte ochranné rukavice/ochranný oděv/ochranné brýle/obličejový štít."
+		},
+		{
+			"code": "P281",
+			"phrase": "Používejte požadované osobní ochranné prostředky."
+		},
+		{
+			"code": "P282",
+			"phrase": "Používejte ochranné rukavice proti chladu a buď obličejový štít, nebo ochranné brýle."
+		},
+		{
+			"code": "P283",
+			"phrase": "Používejte ohnivzdorný oděv nebo oděv zpomalující hoření."
+		},
+		{
+			"code": "P284",
+			"phrase": "[V případě nedostatečného větrání] používejte vybavení pro ochranu dýchacích cest."
+		},
+		{
+			"code": "P285",
+			"phrase": "V případě nedostatečného větrání používejte vybavení pro ochranu dýchacích cest."
+		},
+		{
+			"code": "P301",
+			"phrase": "PŘI POŽITÍ:"
+		},
+		{
+			"code": "P301 + P310",
+			"phrase": "PŘI POŽITÍ: Okamžitě volejte TOXIKOLOGICKÉ INFORMAČNÍ STŘEDISKO/lékaře/…."
+		},
+		{
+			"code": "P301 + P312",
+			"phrase": "PŘI POŽITÍ: Necítíte-li se dobře, volejte TOXIKOLOGICKÉ INFORMAČNÍ STŘEDISKO / lékaře / … ."
+		},
+		{
+			"code": "P301 + P330 + P331",
+			"phrase": "PŘI POŽITÍ: Vypláchněte ústa. NEVYVOLÁVEJTE zvracení."
+		},
+		{
+			"code": "P302",
+			"phrase": "PŘI STYKU S KŮŽÍ:"
+		},
+		{
+			"code": "P302 + P334",
+			"phrase": "PŘI STYKU S KŮŽÍ: Ponořte do studené vody nebo zabalte do vlhkého obvazu."
+		},
+		{
+			"code": "P302 + P350",
+			"phrase": "PŘI STYKU S KŮŽÍ: Jemně omyjte velkým množstvím vody a mýdla."
+		},
+		{
+			"code": "P302 + P352",
+			"phrase": "PŘI STYKU S KŮŽÍ: Omyjte velkým množstvím vody/…"
+		},
+		{
+			"code": "P303",
+			"phrase": "PŘI STYKU S KŮŽÍ (nebo s vlasy):"
+		},
+		{
+			"code": "P303 + P361 + P353",
+			"phrase": "PŘI STYKU S KŮŽÍ (nebo s vlasy): Veškeré kontaminované části oděvu okamžitě svlékněte. Opláchněte kůži vodou [nebo osprchujte]."
+		},
+		{
+			"code": "P304",
+			"phrase": "PŘI VDECHNUTÍ:"
+		},
+		{
+			"code": "P304 + P312",
+			"phrase": "PŘI VDECHNUTÍ: Necítíte-li se dobře, volejte TOXIKOLOGICKÉ INFORMAČNÍ STŘEDISKO nebo lékaře."
+		},
+		{
+			"code": "P304 + P340",
+			"phrase": "PŘI VDECHNUTÍ: Přeneste osobu na čerstvý vzduch a ponechte ji v poloze usnadňující dýchání."
+		},
+		{
+			"code": "P304 + P341",
+			"phrase": "PŘI VDECHNUTÍ: Při obtížném dýchání přeneste postiženého na čerstvý vzduch a ponechte jej v klidu v poloze usnadňující dýchání."
+		},
+		{
+			"code": "P305",
+			"phrase": "PŘI ZASAŽENÍ OČÍ:"
+		},
+		{
+			"code": "P305 + P351 + P338",
+			"phrase": "PŘI ZASAŽENÍ OČÍ: Několik minut opatrně vyplachujte vodou. Vyjměte kontaktní čočky, jsou-li nasazeny a pokud je lze vyjmout snadno. Pokračujte ve vyplachování."
+		},
+		{
+			"code": "P306",
+			"phrase": "PŘI STYKU S ODĚVEM:"
+		},
+		{
+			"code": "P306 + P360",
+			"phrase": "PŘI STYKU S ODĚVEM: Kontaminovaný oděv a kůži oklamžitě omyjte velkým množstvím vody a potom oděv odložte."
+		},
+		{
+			"code": "P307",
+			"phrase": "PŘI expozici:"
+		},
+		{
+			"code": "P307 + P311",
+			"phrase": "PŘI expozici: Volejte TOXIKOLOGICKÉ INFORMAČNÍ STŘEDISKO nebo lékaře."
+		},
+		{
+			"code": "P308",
+			"phrase": "PŘI expozici nebo podezření na ni:"
+		},
+		{
+			"code": "P308 + P311",
+			"phrase": "PŘI expozici nebo podezření na ni: Volejte TOXIKOLOGICKÉ INFORMAČNÍ STŘEDISKO/lékaře/…."
+		},
+		{
+			"code": "P308 + P313",
+			"phrase": "PŘI expozici nebo podezření na ni: Vyhledejte lékařskou pomoc/ošetření."
+		},
+		{
+			"code": "P309",
+			"phrase": "PŘI expozici nebo necítíte-li se dobře:"
+		},
+		{
+			"code": "P309 + P311",
+			"phrase": "PŘI expozici nebo necítíte-li se dobře: Volejte TOXIKOLOGICKÉ INFORMAČNÍ STŘEDISKO nebo lékaře."
+		},
+		{
+			"code": "P310",
+			"phrase": "Okamžitě volejte TOXIKOLOGICKÉ INFORMAČNÍ STŘEDISKO/lékaře/…"
+		},
+		{
+			"code": "P311",
+			"phrase": "Volejte TOXIKOLOGICKÉ INFORMAČNÍ STŘEDISKO/lékaře/…."
+		},
+		{
+			"code": "P312",
+			"phrase": "Necítíte-li se dobře, volejte TOXIKOLOGICKÉ INFORMAČNÍ STŘEDISKO / lékaře /… ."
+		},
+		{
+			"code": "P313",
+			"phrase": "Vyhledejte lékařskou pomoc/ošetření."
+		},
+		{
+			"code": "P314",
+			"phrase": "Necítíte-li se dobře, vyhledejte lékařskou pomoc/ošetření."
+		},
+		{
+			"code": "P315",
+			"phrase": "Okamžitě vyhledejte lékařskou pomoc/ošetření."
+		},
+		{
+			"code": "P320",
+			"phrase": "Je nutné odborné ošetření (viz ... na tomto štítku)."
+		},
+		{
+			"code": "P321",
+			"phrase": "Odborné ošetření (viz ... na tomto štítku)."
+		},
+		{
+			"code": "P322",
+			"phrase": "Specifické opatření (viz ... na tomto štítku)."
+		},
+		{
+			"code": "P330",
+			"phrase": "Vypláchněte ústa."
+		},
+		{
+			"code": "P331",
+			"phrase": "NEVYVOLÁVEJTE zvracení."
+		},
+		{
+			"code": "P332",
+			"phrase": "Při podráždění kůže:"
+		},
+		{
+			"code": "P332 + P313",
+			"phrase": "Při podráždění kůže: Vyhledejte lékařskou pomoc/ošetření."
+		},
+		{
+			"code": "P333",
+			"phrase": "Při podráždění kůže nebo vyrážce:"
+		},
+		{
+			"code": "P333 + P313",
+			"phrase": "Při podráždění kůže nebo vyrážce: Vyhledejte lékařskou pomoc/ošetření."
+		},
+		{
+			"code": "P334",
+			"phrase": "Ponořte do studené vody [nebo zabalte do vlhkého obvazu]."
+		},
+		{
+			"code": "P335",
+			"phrase": "Volné částice odstraňte z kůže."
+		},
+		{
+			"code": "P335 + P334",
+			"phrase": "Volné částice odstraňte z kůže. Ponořte do studené vody/zabalte do vlhkého obvazu."
+		},
+		{
+			"code": "P336",
+			"phrase": "Omrzlá místa ošetřete vlažnou vodou. Postižené místo netřete."
+		},
+		{
+			"code": "P337",
+			"phrase": "Přetrvává-li podráždění očí:"
+		},
+		{
+			"code": "P337 + P313",
+			"phrase": "Přetrvává-li podráždění očí: Vyhledejte lékařskou pomoc/ošetření."
+		},
+		{
+			"code": "P338",
+			"phrase": "Vyjměte kontaktní čočky, jsou-li nasazeny a pokud je lze vyjmout snadno. Pokračujte ve vyplachování."
+		},
+		{
+			"code": "P340",
+			"phrase": "Přeneste osobu na čerstvý vzduch a ponechte ji v poloze usnadňující dýchání."
+		},
+		{
+			"code": "P341",
+			"phrase": "Při obtížném dýchání přeneste postiženého na čerstvý vzduch a ponechte jej v klidu v poloze usnadňující dýchání."
+		},
+		{
+			"code": "P342",
+			"phrase": "Při dýchacích potížích:"
+		},
+		{
+			"code": "P342 + P311",
+			"phrase": "Při dýchacích potížích: Volejte TOXIKOLOGICKÉ INFORMAČNÍ STŘEDISKO/lékaře/…"
+		},
+		{
+			"code": "P350",
+			"phrase": "Jemně omyjte velkým množstvím vody a mýdla."
+		},
+		{
+			"code": "P351",
+			"phrase": "Několik minut opatrně oplachujte vodou."
+		},
+		{
+			"code": "P352",
+			"phrase": "Omyjte velkým množstvím vody/…"
+		},
+		{
+			"code": "P353",
+			"phrase": "Opláchněte kůži vodou [nebo osprchujte]."
+		},
+		{
+			"code": "P360",
+			"phrase": "Kontaminovaný oděv a kůži okamžitě omyjte velkým množstvím vody a potom oděv odložte."
+		},
+		{
+			"code": "P361",
+			"phrase": "Veškeré kontaminované části oděvu okamžitě svlékněte."
+		},
+		{
+			"code": "P361 + P364",
+			"phrase": "Veškeré kontaminované části oděvu okamžitě svlékněte a před opětovným použitím vyperte."
+		},
+		{
+			"code": "P362",
+			"phrase": "Kontaminovaný oděv svlékněte."
+		},
+		{
+			"code": "P362 + P364",
+			"phrase": "Kontaminovaný oděv svlékněte a před opětovným použitím vyperte."
+		},
+		{
+			"code": "P363",
+			"phrase": "Kontaminovaný oděv před opětovným použitím vyperte."
+		},
+		{
+			"code": "P364",
+			"phrase": "A před opětovným použitím vyperte."
+		},
+		{
+			"code": "P370",
+			"phrase": "V případě požáru:"
+		},
+		{
+			"code": "P370 + P376",
+			"phrase": "V případě požáru: Zastavte únik, můžete-li tak učinit bez rizika."
+		},
+		{
+			"code": "P370 + P378",
+			"phrase": "V případě požáru: K uhašení použijte…"
+		},
+		{
+			"code": "P370 + P380",
+			"phrase": "V případě požáru: Vykliďte prostor."
+		},
+		{
+			"code": "P370 + P380 + P375",
+			"phrase": "V případě požáru: Vykliďte prostor. Kvůli nebezpečí výbuchu haste z dostatečné vzdálenosti."
+		},
+		{
+			"code": "P371",
+			"phrase": "V případě velkého požáru a velkého množství:"
+		},
+		{
+			"code": "P371 + P380 + P375",
+			"phrase": "V případě velkého požáru a velkého množství: Vykliďte prostor. Kvůli nebezpečí výbuchu haste z dostatečné vzdálenosti."
+		},
+		{
+			"code": "P372",
+			"phrase": "Nebezpečí výbuchu."
+		},
+		{
+			"code": "P373",
+			"phrase": "Požár NEHASTE, dostane-li se k výbušninám."
+		},
+		{
+			"code": "P374",
+			"phrase": "Haste z přiměřené vzdálenosti a dodržujte běžná opatření."
+		},
+		{
+			"code": "P375",
+			"phrase": "Kvůli nebezpečí výbuchu haste z dostatečné vzdálenosti."
+		},
+		{
+			"code": "P376",
+			"phrase": "Zastavte únik, můžete-li tak učinit bez rizika."
+		},
+		{
+			"code": "P377",
+			"phrase": "Požár unikajícího plynu: Nehaste, nelze-li únik bezpečně zastavit."
+		},
+		{
+			"code": "P378",
+			"phrase": "K uhašení použijte…"
+		},
+		{
+			"code": "P380",
+			"phrase": "Vykliďte _roctor."
+		},
+		{
+			"code": "P381",
+			"phrase": "V případě úniku odstraňte všechny zdroje zapálení."
+		},
+		{
+			"code": "P390",
+			"phrase": "Uniklý produkt absorbujte, aby se zabránilo materiálním škodám."
+		},
+		{
+			"code": "P391",
+			"phrase": "Uniklý produkt seberte."
+		},
+		{
+			"code": "P401",
+			"phrase": "Skladujte v souladu s … ."
+		},
+		{
+			"code": "P402",
+			"phrase": "Skladujte na suchém místě."
+		},
+		{
+			"code": "P402 + P404",
+			"phrase": "Skladujte na suchém místě. Skladujte v uzavřeném obalu."
+		},
+		{
+			"code": "P403",
+			"phrase": "Skladujte na dobře větraném místě."
+		},
+		{
+			"code": "P403 + P233",
+			"phrase": "Skladujte na dobře větraném místě. Uchovávejte obal těsně uzavřený."
+		},
+		{
+			"code": "P403 + P235",
+			"phrase": "Skladujte na dobře větraném místě. Uchovávejte v chladu."
+		},
+		{
+			"code": "P404",
+			"phrase": "Skladujte v uzavřeném obalu."
+		},
+		{
+			"code": "P405",
+			"phrase": "Skladujte uzamčené."
+		},
+		{
+			"code": "P406",
+			"phrase": "Skladujte v obalu odolném proti korozi/… s odolnou vnitřní vrstvou."
+		},
+		{
+			"code": "P407",
+			"phrase": "Mezi stohy nebo paletami ponechte vzduchovou mezeru."
+		},
+		{
+			"code": "P410",
+			"phrase": "Chraňte před slunečním zářením."
+		},
+		{
+			"code": "P410 + P403",
+			"phrase": "Chraňte před slunečním zářením. Skladujte na dobře větraném místě."
+		},
+		{
+			"code": "P410 + P412",
+			"phrase": "Chraňte před slunečním zářením. Nevystavujte teplotě přesahující 50 °C/122°F."
+		},
+		{
+			"code": "P411",
+			"phrase": "Skladujte při teplotě nepřesahující ... °C/...°F."
+		},
+		{
+			"code": "P411 + P235",
+			"phrase": "Skladujte při teplotě nepřesahující ... °C/...°F. Uchovávejte v chladu."
+		},
+		{
+			"code": "P412",
+			"phrase": "Nevystavujte teplotě přesahující 50 °C/122 °F."
+		},
+		{
+			"code": "P413",
+			"phrase": "Množství větší než ... kg/... liber skladujte při teplotě nepřesahující ... °C/...°F."
+		},
+		{
+			"code": "P420",
+			"phrase": "Skladujte odděleně."
+		},
+		{
+			"code": "P422",
+			"phrase": "Skladujte pod ..."
+		},
+		{
+			"code": "P501",
+			"phrase": "Odstraňte obsah/obal ..."
+		},
+		{
+			"code": "P502",
+			"phrase": "Informujte se u výrobce nebo dodavatele o regeneraci nebo recyklaci."
+		}
+	],
+	"MolarniHmotnost": [
+		{
+			"Nazev": "H",
+			"Hodnota": "1.0079"
+		},
+		{
+			"Nazev": "Li",
+			"Hodnota": "6.94"
+		},
+		{
+			"Nazev": "C",
+			"Hodnota": "12.011"
+		},
+		{
+			"Nazev": "O",
+			"Hodnota": "15.9994"
+		}
+  ]
+}

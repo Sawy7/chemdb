@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ChemDB XML Open</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="col s12 m6" id="showmode">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title" id="nazev"></span>
+
+          <table>
+            <tr>
+              <td class="hide-on-small-only">
+                <img id="qrhere" src="" height="150" width="150">
+              </td>
+              <td>
+                <p id="molarhmotnost"></p>
+                <p id="mnozstvi"></p>
+                <p id="cistota"></p>
+                <p id="poznamka"></p>
+              </td>
+            </tr>
+          </table>
+
+          <br>
+          <span id="card-pictograms"></span>
+        </div>
+        <div class="card-action" id="links">
+          <a href="index.html">Zpět</a>
+          <a href="javascript:print()">Tisk</a>
+        </div>
+      </div>
+    </div>
+</div>
+<iframe id="printframe" style="display: none"></iframe>
+<script type="text/javascript" src="scripts/json_details.js"></script>
+<script>
+/*
+//vypocet a vyplneni molarni hmotnosti pomoci vypoctu ze vzorce (hodnoty: http://galerie2.sweb.cz/prvky.htm)
+var molarint = 0;
+for (i = 0; i < 4; i++) {
+  z = xmlDoc.getElementsByTagName("MolarniHmotnost")[i];
+  if (vzorec.includes(z.childNodes[1].innerHTML)) {
+    var max = 1;
+    for (ii = 2; ii < 40; ii++) {
+      if (vzorec.includes(z.childNodes[1].innerHTML+ii)) {
+        if (ii > max) {
+          max = ii
+        }
+      }
+    }
+    molarint = molarint + parseFloat(z.childNodes[3].innerHTML) * max
+  }
+}
+data.molarnih = "Molární hmotnost: " + molarint + " g/mol";
+document.getElementById("molarhmotnost").innerHTML = data.molarnih
+//odeslani hodnot do print souboru
+localStorage["data"] = JSON.stringify(data);*/
+</script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ChemDB</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+</head>
+<body>
+<div class="container">
+  <h1>ChemDB Search</h1>
+</div>
+
+<div class="container">
+  <div class="row" style="display: none" id="updatebox">
+    <div class="col s12">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Synchronizace</span>
+          <p id="updateboxmsg"></p>
+        </div>
+        <div class="card-action">
+          <a href="" id="updateboxlink">Synchronizovat</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="display: none" id="lockbox">
+    <div class="col s12">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title"><i class="material-icons">lock</i>Databáze uzamčena</span>
+          <p>Jiná instance ChemDB má právě přístup k databázi. Všechny úpravy jsou pozastaveny.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="text" id="search_bar" onkeyup="search_filter()" placeholder="Zadejte název chemikálie" title="Vyhledávač">
+  <div class="collection" id="search_results">
+  </div>
+</div>
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">menu</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating blue modal-trigger" href="#askmode" style="display: none" id="addbutton"><i class="material-icons">add</i></a></li>
+    <li><a class="btn-floating blue modal-trigger" href="#asksetupmode" id="setupmodebutton"><i class="material-icons">backup</i></a></li>
+    <li><a class="btn-floating blue modal-trigger" href="#setmode" id="setmodebutton"><i class="material-icons">settings</i></a></li>
+    <li><a class="btn-floating blue modal-trigger" href="#lowmode" id="setmodebutton"><i class="material-icons">trending_down</i></a></li>
+  </ul>
+</div>
+
+<div id="askconmode" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Tvorba nového spojení</h4>
+    <p>Kterou verzi databáze si přejete zachovat?</p>
+  </div>
+  <div class="modal-footer">
+    <a href="javascript:sync('local')" class="modal-close waves-effect waves-green btn-flat">Lokální</a>
+    <a href="javascript:sync('remote')" class="modal-close waves-effect waves-green btn-flat">Na serveru</a>
+  </div>
+</div>
+
+<div id="wrongftp" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Nepodařilo se připojit</h4>
+    <p>Zapište přístupové údaje ještě jednou a bezchybně.</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#setupmode" class="modal-trigger modal-close waves-effect waves-green btn-flat">Opakovat</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zahodit</a>
+  </div>
+</div>
+
+<div id="askmode" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Přídat novou chemikálii</h4>
+    <p>Chcete vytvořit nový záznam?</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#editmode" class="modal-trigger modal-close waves-effect waves-green btn-flat">Ano</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zahodit</a>
+  </div>
+</div>
+
+<div id="asksetupmode" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Nainstalovat webovou komponentu</h4>
+    <p>Tento program nabízí automatickou instalaci webové komponenty, kterou můžete prohlížet z dalších počítačů, telefonů či tabletů.</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#setupmode" class="modal-trigger modal-close waves-effect waves-green btn-flat">Pokračovat</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zahodit</a>
+  </div>
+</div>
+
+<div id="setupmode" class="modal bottom-sheet testmodal">
+  <div class="modal-content">
+    <h4>Nainstalovat webovou komponentu</h4>
+    <p>Zadejte přístupové údaje k ftp serveru.</p>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="ip" type="text">
+        <label for="ip">IP adresa/URL</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="user" type="text">
+        <label for="user">Příhlašovací jméno</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="password" type="password">
+        <label for="password">Heslo</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="switch col s6">
+       <label>
+         URL webového serveru se neshoduje s FTP adresou
+        <input id="addisdiff" type="checkbox" onchange="showdiffadd('addisdiff', 'diffaddrow')">
+         <span class="lever"></span>
+       </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12" id="diffaddrow" style="display: none">
+        <input id="weburl" type="text">
+        <label for="weburl">URL webového serveru</label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="javascript:setup(1)" class="modal-close waves-effect waves-green btn-flat">Nainstalovat</a>
+    <a href="javascript:setup(2)" class="modal-close waves-effect waves-green btn-flat">Pouze se připojit</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zahodit</a>
+  </div>
+</div>
+
+<div id="setmode" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Nastavení</h4>
+    <p>Zadejte přístupové údaje k ftp serveru.</p>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="ip_edit" type="text">
+        <label for="ip_edit">IP adresa/URL</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="user_edit" type="text">
+        <label for="user_edit">Příhlašovací jméno</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="password_edit" type="password">
+        <label for="password_edit">Heslo</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="switch col s6">
+       <label>
+         URL webového serveru se neshoduje s FTP adresou
+        <input id="addisdiff_edit" type="checkbox" onchange="showdiffadd('addisdiff_edit', 'diffaddrow_edit')">
+         <span class="lever"></span>
+       </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12" id="diffaddrow_edit" style="display: none">
+        <input id="weburl_edit" type="text">
+        <label for="weburl_edit">URL webového serveru</label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="javascript:settings()" class="modal-close waves-effect waves-green btn-flat">Změnit</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zahodit</a>
+  </div>
+</div>
+
+<div id="editmode" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Tvorba nové chemikálie</h4>
+    <p>Zadejte název nové chemikálie</p>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="nazev_edit" type="text">
+        <label for="nazev_edit">Název</label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="javascript:newentry()" class="waves-effect waves-green btn-flat">Vytvořit</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zahodit</a>
+  </div>
+</div>
+
+<div id="lowmode" class="modal">
+    <div class="modal-content">
+      <h4>Docházející chemikálie</h4>
+      <input type="text" id="hranice_edit" onkeyup="javascript:runninglow()" placeholder="Hraniční množství">
+      <!--a class="waves-effect waves-light btn" href="javascript:runninglow()" class="col s6">Filtrovat</a-->
+      <div class="collection" id="low_results"></div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Konec</a>
+    </div>
+  </div>
+
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/json_search.js"></script>
+<script>
+//modal
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.fixed-action-btn');
+    var instances = M.FloatingActionButton.init(elems, {
+      hoverEnabled: false
+    });
+  });
+
+//old xml implementation (depreceated)
+
+/*var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    myFunction(this);
+  }
+};
+xmlhttp.open("GET", "chemikalie.xml" , true);
+xmlhttp.send();
+
+function myFunction(xml) {
+  var xmlDoc = xml.responseXML;
+  var xmlLength = xmlDoc.getElementsByTagName("Chemikálie").length;
+  var x;
+  var i = 0;
+  do {
+    x = xmlDoc.getElementsByTagName("Chemikálie")[i];
+    document.getElementById("search_results").innerHTML += "<a href='index_access.html?index=" + i + "' class='collection-item'>" + x.childNodes[1].innerHTML + "</a>";
+    i++
+  }
+  while (i < xmlLength);
+  //document.getElementById("test").innerHTML = "fuck";
+  //document.getElementById("test").innerHTML = x;
+}*/
+
+</script>
+</body>
+</html>

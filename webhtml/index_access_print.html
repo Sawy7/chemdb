@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ChemDB XML Open</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+<script src="js/jquery.min.js"></script>
+<style type="text/css">
+.tg td{font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+.tg th{font-size:14px;font-weight:normal;padding:10px 5px;border-width:0px;overflow:hidden;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}}
+</style>
+</head>
+<body>
+<table id="buttons">
+  <tr>
+    <td>
+      <h1></h1>
+    </td>
+    <td>
+      <form method="get" action="index.html" id="backbutton">
+        <button type="submit">Back</button>
+      </form>
+  </td>
+  <td>
+    <button onclick="printData()">Print</button>
+  </td>
+  <td>
+    <form method="get" action="tabletest.html" id="backbutton">
+      <button type="submit">Table</button>
+    </form>
+  </td>
+  </tr>
+</table>
+<p id="test"></p>
+
+<table class="tg">
+  <tr>
+    <th class="tg-0qr" rowspan="2" valign="middle" id="qrcopy"></th>
+    <th class="tg-0lax" id="nazev">loading</th>
+  </tr>
+  <tr>
+    <td class="tg-0lax" id="cistota" width="500mm">Čistota: </td>
+  </tr>
+</table>
+
+<table>
+  <tr id="pictograms">Nebezpečí: </tr>
+</table>
+
+<p id="footer">Under construction || © Jan Němec</p>
+
+<script>
+  data = JSON.parse(localStorage["data"]);
+  document.getElementById("qrcopy").innerHTML = data.qrtag;
+  var hcodes;
+
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      myFunction(this);
+      var xmlhttp2 = new XMLHttpRequest();
+      xmlhttp2.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          myFunction2(this);
+        }
+      };
+      xmlhttp2.open("GET", "statements.xml" , true);
+      xmlhttp2.send();
+    }
+  };
+  xmlhttp.open("GET", "chemikalie.xml" , true);
+  xmlhttp.send();
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+function myFunction(xml) {
+    var xmlDoc = xml.responseXML;
+    var values = ["nazev", "vzorec", "trivialne", "mnozstvi", "jednotka", "cistota", "C", "E", "F", "N", "O", "T", "T+", "Xi", "Xn", "poznamka", "vyloucit"];
+    //var y = document.getElementById("textbox").value;
+    var y = getUrlVars()["index"];
+    var x = xmlDoc.getElementsByTagName("Chemikálie")[y];
+    document.getElementById("nazev").innerHTML = "<h2>" + data.nazev + "</h2>";
+    document.getElementById("nazev").innerHTML += data.vzorec;
+    if (data.trivialne != "(-)") {
+      document.getElementById("nazev").innerHTML += " " + data.trivialne;
+    }
+    document.getElementById("cistota").innerHTML += data.cistota + "<br>";
+    hcodes = x.childNodes[31].innerHTML;
+    document.getElementById("pictograms").innerHTML += data.pictograms;
+    document.getElementById("cistota").innerHTML += data.poznamka;
+}
+
+function printData() {
+  //doplnit kooooody
+  document.getElementById("buttons").style.display = "none";
+  document.getElementById("footer").style.display = "none";
+  window.print();
+  document.getElementById("buttons").style.display = "";
+  document.getElementById("footer").style.display = "";
+}
+</script>
+</body>
+</html>

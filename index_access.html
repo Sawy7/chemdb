@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ChemDB XML Open</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="col s12 m6" id="showmode">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title" id="nazev"></span>
+
+          <table>
+            <tr>
+              <td class="hide-on-small-only">
+                <img id="qrhere" src="" height="150" width="150">
+              </td>
+              <td>
+                <p id="molarhmotnost"></p>
+                <p id="mnozstvi"></p>
+                <p id="cistota"></p>
+                <p id="poznamka"></p>
+              </td>
+            </tr>
+          </table>
+
+          <br>
+          <span id="card-pictograms"></span>
+        </div>
+        <div class="card-action" id="links">
+          <a href="index.html">Zpět</a>
+          <a href="javascript:print()">Tisk</a>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6" id="editmode" style="display: none">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title"><h3>Mód úpravy chemikálie</h3></span>
+          <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s4">
+                  <input id="nazev_edit" type="text" value="test">
+                  <label for="nazev_edit" id="nazev_edit_label">Název</label>
+                </div>
+                <div class="input-field col s4">
+                  <input id="vzorec_edit" type="text">
+                  <label for="vzorec_edit">Vzorec</label>
+                </div>
+                <div class="input-field col s4">
+                  <input id="trivialne_edit" type="text">
+                  <label for="trivialne_edit">Triviálně</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
+                  <input id="cistota_edit" type="text">
+                  <label for="cistota_edit">Čistota</label>
+                </div>
+                <div class="input-field col s4">
+                  <input id="mnozstvi_edit" type="text">
+                  <label for="mnozstvi_edit">Množství</label>
+                </div>
+                <div class="input-field col s2">
+                  <input id="jednotka_edit" type="text">
+                  <label for="jednotka_edit">Jednotka</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="poznamkaraw_edit" type="text">
+                  <label for="poznamkaraw_edit">Poznámka (H a P věty)</label>
+                </div>
+              </div>
+              <div class="row">
+                <ul class="collapsible">
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons">tune</i>Označení</div>
+                    <div class="collapsible-body">
+                      <a class="waves-effect waves-light btn" href="javascript:automat()">Automaticky určit</a>
+                     <div class="switch">
+                       <label>
+                         Explosive
+                         <input id="explosive_edit" type="checkbox">
+                         <span class="lever"></span>
+                       </label>
+                     </div>
+                     <div class="switch">
+                       <label>
+                         Flammable
+                         <input id="flammable_edit" type="checkbox">
+                         <span class="lever"></span>
+                       </label>
+                    </div>
+                    <div class="switch">
+                     <label>
+                       Oxidising
+                      <input id="oxidising_edit" type="checkbox">
+                       <span class="lever"></span>
+                     </label>
+                    </div>
+                    <div class="switch">
+                     <label>
+                       Gasunderpressure
+                      <input id="gasunderpressure_edit" type="checkbox">
+                       <span class="lever"></span>
+                     </label>
+                    </div>
+                    <div class="switch">
+                     <label>
+                       Corrosive
+                      <input id="corrosive_edit" type="checkbox">
+                       <span class="lever"></span>
+                     </label>
+                    </div>
+                    <div class="switch">
+                     <label>
+                       Toxicity
+                      <input id="toxicity_edit" type="checkbox">
+                       <span class="lever"></span>
+                     </label>
+                    </div>
+                    <div class="switch">
+                     <label>
+                       Health
+                      <input id="health_edit" type="checkbox">
+                       <span class="lever"></span>
+                     </label>
+                    </div>
+                    <div class="switch">
+                     <label>
+                       Chronichealth
+                      <input id="chronichealth_edit" type="checkbox">
+                       <span class="lever"></span>
+                     </label>
+                    </div>
+                    <div class="switch">
+                     <label>
+                       Environmental
+                      <input id="environmental_edit" type="checkbox">
+                       <span class="lever"></span>
+                     </label>
+                    </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card-action" id="links">
+          <a href="javascript:saveandexit()">Uložit a zavřít</a>
+          <a href="#trashmode" class="modal-trigger">Odstranit záznam</a>
+          <a href="javascript:endeditmode()">Zahodit změny</a>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="fixed-action-btn" id="editmodebutton">
+  <a class="btn-floating btn-large waves-effect waves-light red" href="javascript:editmode()" style="display: none" id="editbutton"><i class="material-icons">edit</i></a>
+</div>
+<div id="trashmode" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Odstranění chemikálie</h4>
+    <p>Opravdu chcete odstanit tento záznam?</p>
+    <p><i>Tuto akci nelze jednoduše vrátit.</i></p>
+  </div>
+  <div class="modal-footer">
+    <a href="javascript:todatrash()" class="waves-effect waves-green btn-flat">Ano</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ne</a>
+  </div>
+</div>
+<iframe id="printframe" style="display: none"></iframe>
+<script type="text/javascript" src="scripts/json_details.js"></script>
+<script>
+//collapsible
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+  });
+//modal
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems);
+  });
+/*
+//vypocet a vyplneni molarni hmotnosti pomoci vypoctu ze vzorce (hodnoty: http://galerie2.sweb.cz/prvky.htm)
+var molarint = 0;
+for (i = 0; i < 4; i++) {
+  z = xmlDoc.getElementsByTagName("MolarniHmotnost")[i];
+  if (vzorec.includes(z.childNodes[1].innerHTML)) {
+    var max = 1;
+    for (ii = 2; ii < 40; ii++) {
+      if (vzorec.includes(z.childNodes[1].innerHTML+ii)) {
+        if (ii > max) {
+          max = ii
+        }
+      }
+    }
+    molarint = molarint + parseFloat(z.childNodes[3].innerHTML) * max
+  }
+}
+data.molarnih = "Molární hmotnost: " + molarint + " g/mol";
+document.getElementById("molarhmotnost").innerHTML = data.molarnih
+//odeslani hodnot do print souboru
+localStorage["data"] = JSON.stringify(data);*/
+</script>
+</body>
+</html>

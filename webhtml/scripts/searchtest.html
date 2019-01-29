@@ -1,0 +1,12 @@
+<script type="text/javascript">
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var parsedjson = JSON.parse(this.responseText);
+      document.getElementById("demo").innerHTML = parsedjson["Chemikalie"].length;
+    }
+  };
+  xmlhttp.open("GET", "../chemikalie_json.json", true);
+  xmlhttp.send();
+</script>
+<p id="demo">hello</p>
