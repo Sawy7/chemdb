@@ -76,6 +76,7 @@ function lockdb() {
       if (localStorage["lastclaim"] == remoteLock & itwasme == 0) {
         console.log("Last login")
         itwasme = 1;
+        sessionStorage["itwasme"] = itwasme;
       }
       console.log("deltasec: " + delta/1000);
       if (delta > 90000 || itwasme == 1) {
@@ -420,6 +421,17 @@ function settings () {
   parsedconfig = configback;
   window.location.reload();
 }
+
+function removeconfig() {
+  var configback = {
+    "online-component": 0,
+    "timestamp": parsedconfig.timestamp
+  }
+  fs.writeFileSync(path.resolve(__dirname, "config.json"), JSON.stringify(configback, null, 2));
+  parsedconfig = configback;
+  window.location.reload();
+}
+
 
 function newentry() {
   var newobj = {
