@@ -1,8 +1,7 @@
-const electron = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const url = require('url');
 const path = require('path');
-
-const {app, BrowserWindow} = electron;
+const {autoUpdater} = require("electron-updater");
 
 let mainWindow;
 
@@ -15,4 +14,15 @@ app.on('ready', function(){
     protocol: 'file:',
     slashes: true
   }))
+  autoUpdater.checkForUpdates();
 });
+
+// Notifikace pro BrowserWindow
+autoUpdater.on('update-downloaded', (info) => {
+    mainWindow.webContents.send('updateReady')
+});
+
+// Signál pro vypnutí a update
+ipcMain.on("quitAndInstall", (event, arg) => {
+    autoUpdater.quitAndInstall();
+})

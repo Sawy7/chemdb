@@ -1,21 +1,19 @@
 {
   "name": "chemdb",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Aimed to show and print school database of chemicals with aditional features.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "pack": "build --dir"
+    "pack": "build --dir --win",
+    "ship": "build --win -p always"
   },
   "build": {
     "appId": "com.chemdb.app",
     "productName": "ChemDB",
     "asar": false
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Sawy7/chemdb.git"
-  },
+  "repository": "https://github.com/Sawy7/chemdb",
   "author": "Jan Němec",
   "license": "MIT",
   "bugs": {
@@ -27,8 +25,9 @@
     "electron-builder": "^20.38.5"
   },
   "dependencies": {
+    "electron-auto-updater": "^1.0.0",
     "electron-db": "^0.8.1",
-    "electron-forge": "^5.2.2",
+    "electron-forge": "^5.2.4",
     "electron-updater": "^4.0.6",
     "node-ftp": "^0.3.10"
   }

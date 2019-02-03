@@ -9,6 +9,7 @@
 <body>
 <div class="container">
   <h1>ChemDB Search</h1>
+  <p>v0.1.0</p>
 </div>
 
 <div class="container">
@@ -21,6 +22,19 @@
         </div>
         <div class="card-action">
           <a href="" id="updateboxlink">Synchronizovat</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="display: none" id="upgradebox">
+    <div class="col s12">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Aktualizace k dispozici</span>
+          <p>Po kliknutí na tlačítko <i>Aktualizovat</i> se ChemDB restartuje a bude aplikována nejnovější verze.</p>
+        </div>
+        <div class="card-action">
+          <a href="#" id="ready" onClick="ipcRenderer.send('quitAndInstall')">Aktualizovat</a>
         </div>
       </div>
     </div>
@@ -232,32 +246,6 @@
       hoverEnabled: false
     });
   });
-
-//old xml implementation (depreceated)
-
-/*var xmlhttp = new XMLHttpRequest();
-xmlhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    myFunction(this);
-  }
-};
-xmlhttp.open("GET", "chemikalie.xml" , true);
-xmlhttp.send();
-
-function myFunction(xml) {
-  var xmlDoc = xml.responseXML;
-  var xmlLength = xmlDoc.getElementsByTagName("Chemikálie").length;
-  var x;
-  var i = 0;
-  do {
-    x = xmlDoc.getElementsByTagName("Chemikálie")[i];
-    document.getElementById("search_results").innerHTML += "<a href='index_access.html?index=" + i + "' class='collection-item'>" + x.childNodes[1].innerHTML + "</a>";
-    i++
-  }
-  while (i < xmlLength);
-  //document.getElementById("test").innerHTML = "fuck";
-  //document.getElementById("test").innerHTML = x;
-}*/
 
 </script>
 </body>

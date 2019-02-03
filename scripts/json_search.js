@@ -3,6 +3,7 @@ var fs = require('fs');
 var Client = require('node-ftp');
 const path = require("path");
 const request = require('request');
+const ipcRenderer = require('electron').ipcRenderer;
 
 var config = fs.readFileSync(path.resolve(__dirname, "config.json"));
 var parsedconfig = JSON.parse(config);
@@ -22,6 +23,16 @@ for (i = 0; i < length; i++) {
 }
 console.log("Search data is home, baby!");
 
+
+// wait for an updateReady message
+ipcRenderer.on('updateReady', function(event, text) {
+  // changes the text of the button
+  document.getElementById("upgradebox").style = "";
+  sessionStorage["update"] = 1;
+})
+if (sessionStorage["update"] == 1) {
+  document.getElementById("upgradebox").style = "";
+}
 
 var stampok = 0;
 checkstamps();
