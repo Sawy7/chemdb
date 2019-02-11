@@ -1,11 +1,13 @@
-var app = require('electron').remote;
+const remote = require('electron').remote;
+const app = remote.app;
 var fs = require('fs');
 var Client = require('node-ftp');
 const path = require("path");
 const request = require('request');
 const ipcRenderer = require('electron').ipcRenderer;
+const userData = app.getPath('userData');
 
-var config = fs.readFileSync(path.resolve(__dirname, "config.json"));
+var config = fs.readFileSync(path.resolve(__dirname, userData + "/config.json"));
 var parsedconfig = JSON.parse(config);
 if (parsedconfig["online-component"] == 0) {
   document.getElementById("setmodebutton").style = "display: none";
@@ -14,7 +16,7 @@ if (parsedconfig["online-component"] == 0) {
   loadsettings();
 }
 
-var myjson = fs.readFileSync(path.resolve(__dirname, "chemikalie_json.json"));
+var myjson = fs.readFileSync(path.resolve(__dirname, userData + "/chemikalie_json.json"));
 var parsedjson = JSON.parse(myjson);
 var length = parsedjson["Chemikalie"].length;
 var search = [];
@@ -119,6 +121,9 @@ function lockdb() {
       }
     });
   }
+  else {
+    document.getElementById("addbutton").style = "";
+  }
   stampok = 1;
 }
 
@@ -146,8 +151,8 @@ function checkstamps(nobox) {
         }
       } else if (nobox == true) {
         parsedconfig.timestamp = remoteStamp;
-        fs.writeFileSync(path.resolve(__dirname, "chemikalie_json.json"), JSON.stringify(parsedjson, null, 2));
-        fs.writeFileSync(path.resolve(__dirname, "config.json"), JSON.stringify(parsedconfig, null, 2));
+        fs.writeFileSync(path.resolve(__dirname, userData + "/chemikalie_json.json"), JSON.stringify(parsedjson, null, 2));
+        fs.writeFileSync(path.resolve(__dirname, userData + "/config.json"), JSON.stringify(parsedconfig, null, 2));
         window.location.reload();
       }
     });
@@ -165,7 +170,7 @@ function sync(force) {
       //ftp srandy
     	var c = new Client();
     	c.on('ready', function() {
-      		c.put(path.resolve(__dirname, "chemikalie_json.json"), 'chemikalie_json.json', function(err) {
+      		c.put(path.resolve(__dirname, userData + "/chemikalie_json.json"), 'chemikalie_json.json', function(err) {
       		    if (err) throw err;
         		  c.end();
       		});
@@ -208,7 +213,7 @@ function setup(setcon) {
   } else {
     configback.weburl = document.getElementById("ip").value;
   }
-  fs.writeFileSync(path.resolve(__dirname, "config.json"), JSON.stringify(configback, null, 2));
+  fs.writeFileSync(path.resolve(__dirname, userData + "/config.json"), JSON.stringify(configback, null, 2));
   parsedconfig = configback;
   var c = new Client();
   c.on('error', function (err){
@@ -217,7 +222,7 @@ function setup(setcon) {
       configback = {
         "online-component": 0
       }
-      fs.writeFileSync(path.resolve(__dirname, "config.json"), JSON.stringify(configback, null, 2));
+      fs.writeFileSync(path.resolve(__dirname, userData + "/config.json"), JSON.stringify(configback, null, 2));
       parsedconfig = configback;
       var wrongftp = M.Modal.init(document.querySelector('#wrongftp'), {dismissable: false});
       askconmodal.close();
@@ -232,7 +237,7 @@ function setup(setcon) {
     //ftp srandy
     c.on('ready', function() {
       //load em loose files
-      c.put(path.resolve(__dirname, "chemikalie_json.json"), 'chemikalie_json.json', function(err) {
+      c.put(path.resolve(__dirname, userData + "/chemikalie_json.json"), 'chemikalie_json.json', function(err) {
         if (err) throw err;
         c.end();
       });
@@ -428,7 +433,7 @@ function settings () {
     configback.weburl = document.getElementById("ip_edit").value;
   }
   configback.timestamp = parsedconfig["timestamp"];
-  fs.writeFileSync(path.resolve(__dirname, "config.json"), JSON.stringify(configback, null, 2));
+  fs.writeFileSync(path.resolve(__dirname, userData + "/config.json"), JSON.stringify(configback, null, 2));
   parsedconfig = configback;
   window.location.reload();
 }
@@ -438,7 +443,7 @@ function removeconfig() {
     "online-component": 0,
     "timestamp": parsedconfig.timestamp
   }
-  fs.writeFileSync(path.resolve(__dirname, "config.json"), JSON.stringify(configback, null, 2));
+  fs.writeFileSync(path.resolve(__dirname, userData + "/config.json"), JSON.stringify(configback, null, 2));
   parsedconfig = configback;
   window.location.reload();
 }
@@ -466,7 +471,7 @@ function newentry() {
   }
   newobj.nazev = document.getElementById("nazev_edit").value;
   parsedjson["Chemikalie"].push(newobj);
-  fs.writeFileSync(path.resolve(__dirname, "chemikalie_json.json"), JSON.stringify(parsedjson, null, 2));
+  fs.writeFileSync(path.resolve(__dirname, userData + "/chemikalie_json.json"), JSON.stringify(parsedjson, null, 2));
   isthisnew = true;
   localStorage["isthisnew"] = JSON.stringify(isthisnew);
   window.location.href = "index_access.html?index=" + length;

@@ -1,12 +1,15 @@
-var app = require('electron').remote;
+const remote = require('electron').remote;
+const app = remote.app;
 var fs = require('fs');
 var Client = require('node-ftp');
 const path = require("path");
 const request = require('request');
-var myjson = fs.readFileSync(path.resolve(__dirname, "chemikalie_json.json"));
+const userData = app.getPath('userData');
+
+var myjson = fs.readFileSync(path.resolve(__dirname, userData + "/chemikalie_json.json"));
 var parsedjson = JSON.parse(myjson);
 
-var config = fs.readFileSync(path.resolve(__dirname, "config.json"));
+var config = fs.readFileSync(path.resolve(__dirname, userData + "/config.json"));
 var parsedconfig = JSON.parse(config);
 
 var vars = {};
@@ -81,6 +84,9 @@ function lockdb() {
         sessionStorage["itwasme"] = itwasme;
       }
     });
+  }
+  else {
+    document.getElementById("editbutton").style = "";
   }
   stampok = 1;
 }
@@ -214,7 +220,7 @@ function endeditmode() {
 
 function todatrash() {
   parsedjson["Chemikalie"].splice(vars["index"],1);
-  fs.writeFileSync(path.resolve(__dirname, "chemikalie_json.json"), JSON.stringify(parsedjson, null, 2));
+  fs.writeFileSync(path.resolve(__dirname, userData + "/chemikalie_json.json"), JSON.stringify(parsedjson, null, 2));
   settimestamp();
   window.location.href = "index.html";
 }
@@ -222,7 +228,7 @@ function todatrash() {
 function settimestamp() {
   var configback = parsedconfig;
   configback.timestamp = Date.now();
-  fs.writeFileSync(path.resolve(__dirname, "config.json"), JSON.stringify(configback, null, 2));
+  fs.writeFileSync(path.resolve(__dirname, userData + "/config.json"), JSON.stringify(configback, null, 2));
   parsedconfig = configback;
 }
 
@@ -242,7 +248,7 @@ function saveandexit() {
       x[switches[i]] = "0";
     }
   }
-  fs.writeFileSync(path.resolve(__dirname, "chemikalie_json.json"), JSON.stringify(parsedjson, null, 2));
+  fs.writeFileSync(path.resolve(__dirname, userData + "/chemikalie_json.json"), JSON.stringify(parsedjson, null, 2));
   settimestamp();
   window.location.reload();
 }
