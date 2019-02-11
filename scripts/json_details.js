@@ -50,6 +50,7 @@ function lockdb() {
       if (err) { return console.log(err); }
       remoteLock = body.lockstamp;
       var delta;
+      var lastclaim;
       if (typeof remoteLock !== "undefined") {
         delta = Date.now() - remoteLock;
       } else {
@@ -65,7 +66,8 @@ function lockdb() {
           "timestamp": remoteStamp,
           "lockstamp": Date.now()
         }
-        localStorage["lastclaim"] = timestampback.lockstamp;
+        lastclaim = timestampback.lockstamp;
+        fs.writeFileSync(path.resolve(__dirname, userData + "/lastclaim.json"), JSON.stringify(lastclaim, null, 2));
         fs.writeFileSync(path.resolve(__dirname, "webhtml/timestamp.json"), JSON.stringify(timestampback, null, 2));
         var c = new Client();
       	c.on('ready', function() {

@@ -15,6 +15,7 @@ if (parsedconfig["online-component"] == 0) {
   document.getElementById("setupmodebutton").style = "display: none";
   loadsettings();
 }
+document.getElementById("versiontag").innerHTML += app.getVersion();
 
 var myjson = fs.readFileSync(path.resolve(__dirname, userData + "/chemikalie_json.json"));
 var parsedjson = JSON.parse(myjson);
@@ -81,12 +82,14 @@ function lockdb() {
       if (err) { return console.log(err); }
       remoteLock = body.lockstamp;
       var delta;
+      var lastclaim;
       if (typeof remoteLock !== "undefined") {
         delta = Date.now() - remoteLock;
       } else {
         delta = 91000;
       }
-      if (localStorage["lastclaim"] == remoteLock & itwasme == 0) {
+      lastclaim = JSON.parse(fs.readFileSync(path.resolve(__dirname, userData + "/lastclaim.json")));
+      if (lastclaim == remoteLock & itwasme == 0) {
         console.log("Last login")
         itwasme = 1;
         sessionStorage["itwasme"] = itwasme;
@@ -101,7 +104,8 @@ function lockdb() {
           "timestamp": remoteStamp,
           "lockstamp": Date.now()
         }
-        localStorage["lastclaim"] = timestampback.lockstamp;
+        lastclaim = timestampback.lockstamp;
+        fs.writeFileSync(path.resolve(__dirname, userData + "/lastclaim.json"), JSON.stringify(lastclaim, null, 2));
         fs.writeFileSync(path.resolve(__dirname, "webhtml/timestamp.json"), JSON.stringify(timestampback, null, 2));
         var c = new Client();
       	c.on('ready', function() {
