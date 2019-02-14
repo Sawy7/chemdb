@@ -7,6 +7,16 @@ const request = require('request');
 const ipcRenderer = require('electron').ipcRenderer;
 const userData = app.getPath('userData');
 
+// wait for an updateReady message
+ipcRenderer.on('updateReady', function(event, text) {
+  // changes the text of the button
+  document.getElementById("upgradebox").style = "";
+  sessionStorage["update"] = 1;
+})
+if (sessionStorage["update"] == 1) {
+  document.getElementById("upgradebox").style = "";
+}
+
 var config = fs.readFileSync(path.resolve(__dirname, userData + "/config.json"));
 var parsedconfig = JSON.parse(config);
 if (parsedconfig["online-component"] == 0) {
@@ -25,17 +35,6 @@ for (i = 0; i < length; i++) {
   document.getElementById("search_results").innerHTML += "<a href='index_access.html?index=" + i + "' class='collection-item'>" + parsedjson["Chemikalie"][i]["nazev"] + "</a>"
 }
 console.log("Search data is home, baby!");
-
-
-// wait for an updateReady message
-ipcRenderer.on('updateReady', function(event, text) {
-  // changes the text of the button
-  document.getElementById("upgradebox").style = "";
-  sessionStorage["update"] = 1;
-})
-if (sessionStorage["update"] == 1) {
-  document.getElementById("upgradebox").style = "";
-}
 
 var stampok = 0;
 checkstamps();
