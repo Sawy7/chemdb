@@ -157,7 +157,7 @@ function webup() {
   request(verurl, { json: true }, (err, res, body) => {
     if (err) { return console.log(err); }
     console.log(body);
-    if (typeof body == "undefined" || body < app.getVersion()) {
+    if (body !== app.getVersion() || body < app.getVersion()) {
       document.getElementById("webupbox").style = "";
     }
   });
