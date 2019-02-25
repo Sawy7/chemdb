@@ -7,8 +7,30 @@ xmlhttp.onreadystatechange = function() {
     parsedjson = JSON.parse(this.responseText);
     length = parsedjson["Chemikalie"].length;
     var search = [];
-    for (i = 0; i < length; i++) {
-      document.getElementById("search_results").innerHTML += "<a href='index_access.html?index=" + i + "' class='collection-item'>" + parsedjson["Chemikalie"][i]["nazev"] + "</a>"
+    var alphabetically = true;
+    if (alphabetically == true) {
+      var nonsorted = [];
+      for (i = 0; i < length; i++) {
+        nonsorted[i] = parsedjson["Chemikalie"][i]["nazev"];
+      }
+      var sorted = nonsorted.sort(function (a, b) {
+        if (a.toLowerCase() < b.toLowerCase()) return -1;
+        else if (a.toLowerCase() > b.toLowerCase()) return 1;
+        return 0;
+      });
+      for (i = 0; i < length; i++) {
+        var formernum;
+        for (y = 0; y < length; y++) {
+          if (sorted[i] == parsedjson["Chemikalie"][y]["nazev"]) {
+            formernum = y;
+          }
+        }
+        document.getElementById("search_results").innerHTML += "<a href='index_access.html?index=" + formernum + "' class='collection-item'>" + sorted[i] + "</a>";
+      }
+    } else {
+      for (i = 0; i < length; i++) {
+        document.getElementById("search_results").innerHTML += "<a href='index_access.html?index=" + i + "' class='collection-item'>" + parsedjson["Chemikalie"][i]["nazev"] + "</a>";
+      }
     }
     console.log("Search data is home, baby!");
   }

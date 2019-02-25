@@ -31,8 +31,30 @@ var myjson = fs.readFileSync(path.resolve(__dirname, userData + "/chemikalie_jso
 var parsedjson = JSON.parse(myjson);
 var length = parsedjson["Chemikalie"].length;
 var search = [];
-for (i = 0; i < length; i++) {
-  document.getElementById("search_results").innerHTML += "<a href='index_access.html?index=" + i + "' class='collection-item'>" + parsedjson["Chemikalie"][i]["nazev"] + "</a>"
+var alphabetically = true;
+if (alphabetically == true) {
+  var nonsorted = [];
+  for (i = 0; i < length; i++) {
+    nonsorted[i] = parsedjson["Chemikalie"][i]["nazev"];
+  }
+  var sorted = nonsorted.sort(function (a, b) {
+    if (a.toLowerCase() < b.toLowerCase()) return -1;
+    else if (a.toLowerCase() > b.toLowerCase()) return 1;
+    return 0;
+  });
+  for (i = 0; i < length; i++) {
+    var formernum;
+    for (y = 0; y < length; y++) {
+      if (sorted[i] == parsedjson["Chemikalie"][y]["nazev"]) {
+        formernum = y;
+      }
+    }
+    document.getElementById("search_results").innerHTML += "<a href='index_access.html?index=" + formernum + "' class='collection-item'>" + sorted[i] + "</a>";
+  }
+} else {
+  for (i = 0; i < length; i++) {
+    document.getElementById("search_results").innerHTML += "<a href='index_access.html?index=" + i + "' class='collection-item'>" + parsedjson["Chemikalie"][i]["nazev"] + "</a>";
+  }
 }
 console.log("Search data is home, baby!");
 
@@ -130,6 +152,22 @@ function lockdb() {
   stampok = 1;
 }
 
+function webup() {
+  var verurl = "http://" + parsedconfig.weburl + "/version.json";
+  request(verurl, { json: true }, (err, res, body) => {
+    if (err) { return console.log(err); }
+    console.log(body);
+    if (typeof body == "undefined" || body < app.getVersion()) {
+      document.getElementById("webupbox").style = "";
+    }
+  });
+}
+
+function webupdo() {
+  setup(3);
+  document.getElementById("webupbox").style = "display: none";
+}
+
 var remoteStamp;
 
 function checkstamps(nobox) {
@@ -200,24 +238,28 @@ function sync(force) {
 }
 
 function setup(setcon) {
-  var configback = {
-    "online-component": 1,
-    "ip": "",
-    "user": "",
-    "password": "",
-    "weburl": "",
-    "timestamp": Date.now()
+  if (setcon !== 3) {
+    var configback = {
+      "online-component": 1,
+      "ip": "",
+      "user": "",
+      "password": "",
+      "weburl": "",
+      "timestamp": Date.now()
+    }
+    configback.ip = document.getElementById("ip").value;
+    configback.user = document.getElementById("user").value;
+    configback.password = document.getElementById("password").value;
+    if (document.getElementById("addisdiff").checked == true) {
+      configback.weburl = document.getElementById("weburl").value;
+    } else {
+      configback.weburl = document.getElementById("ip").value;
+    }
+    fs.writeFileSync(path.resolve(__dirname, userData + "/config.json"), JSON.stringify(configback, null, 2));
+    parsedconfig = configback;
   }
-  configback.ip = document.getElementById("ip").value;
-  configback.user = document.getElementById("user").value;
-  configback.password = document.getElementById("password").value;
-  if (document.getElementById("addisdiff").checked == true) {
-    configback.weburl = document.getElementById("weburl").value;
-  } else {
-    configback.weburl = document.getElementById("ip").value;
-  }
-  fs.writeFileSync(path.resolve(__dirname, userData + "/config.json"), JSON.stringify(configback, null, 2));
-  parsedconfig = configback;
+  var version = app.getVersion();
+  fs.writeFileSync(path.resolve(__dirname, userData + "/version.json"), JSON.stringify(version, null, 2));
   var c = new Client();
   c.on('error', function (err){
     if (err) {
@@ -232,15 +274,21 @@ function setup(setcon) {
       wrongftp.open();
     }
   })
-  if (setcon == 1) {
+  if (setcon == 1 || setcon == 3) {
     var timestampback = {
       "timestamp": parsedconfig.timestamp
     }
-    fs.writeFileSync(path.resolve(__dirname, "webhtml/timestamp.json"), JSON.stringify(timestampback, null, 2));
+    fs.writeFileSync(path.resolve(__dirname, userData + "/version.json"), JSON.stringify(version, null, 2));
     //ftp srandy
     c.on('ready', function() {
       //load em loose files
-      c.put(path.resolve(__dirname, userData + "/chemikalie_json.json"), 'chemikalie_json.json', function(err) {
+      if (setcon == 1) {
+        c.put(path.resolve(__dirname, userData + "/chemikalie_json.json"), 'chemikalie_json.json', function(err) {
+          if (err) throw err;
+          c.end();
+        });
+      }
+      c.put(path.resolve(__dirname, userData + "/version.json"), 'version.json', function(err) {
         if (err) throw err;
         c.end();
       });
