@@ -221,6 +221,7 @@ function sync(force) {
           });
     	});
     	c.connect({host: parsedconfig["ip"], user: parsedconfig["user"], password: parsedconfig["password"]});
+      remoteStamp = parsedconfig.timestamp;
   		console.log("upload hotov");
     }
 	} else if (force == "remote") {
