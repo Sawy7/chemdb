@@ -127,10 +127,10 @@ function lockdb() {
         }
         lastclaim = timestampback.lockstamp;
         fs.writeFileSync(path.resolve(__dirname, userData + "/lastclaim.json"), JSON.stringify(lastclaim, null, 2));
-        fs.writeFileSync(path.resolve(__dirname, "webhtml/timestamp.json"), JSON.stringify(timestampback, null, 2));
+        fs.writeFileSync(path.resolve(__dirname, userData + "/timestamp.json"), JSON.stringify(timestampback, null, 2));
         var c = new Client();
       	c.on('ready', function() {
-            c.put(path.resolve(__dirname, "webhtml/timestamp.json"), 'timestamp.json', function(err) {
+            c.put(path.resolve(__dirname, userData + "/timestamp.json"), 'timestamp.json', function(err) {
               if (err) throw err;
               c.end();
             });
@@ -207,7 +207,7 @@ function sync(force) {
       var timestampback = {
         "timestamp": parsedconfig.timestamp
       }
-      fs.writeFileSync(path.resolve(__dirname, "webhtml/timestamp.json"), JSON.stringify(timestampback, null, 2));
+      fs.writeFileSync(path.resolve(__dirname, userData + "/timestamp.json"), JSON.stringify(timestampback, null, 2));
       //ftp srandy
     	var c = new Client();
     	c.on('ready', function() {
@@ -215,7 +215,7 @@ function sync(force) {
       		    if (err) throw err;
         		  c.end();
       		});
-          c.put(path.resolve(__dirname, "webhtml/timestamp.json"), 'timestamp.json', function(err) {
+          c.put(path.resolve(__dirname, userData + "/timestamp.json"), 'timestamp.json', function(err) {
             if (err) throw err;
             c.end();
           });
@@ -308,7 +308,7 @@ function setup(setcon) {
         if (err) throw err;
         c.end();
       });
-	    c.put(path.resolve(__dirname, "webhtml/timestamp.json"), 'timestamp.json', function(err) {
+	    c.put(path.resolve(__dirname, userData + "/timestamp.json"), 'timestamp.json', function(err) {
         if (err) throw err;
         c.end();
       });
