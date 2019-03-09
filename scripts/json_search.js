@@ -32,42 +32,65 @@ var parsedjson = JSON.parse(myjson);
 var length = parsedjson["Chemikalie"].length;
 var search = [];
 var alphabetically = true;
-if (alphabetically == true) {
-  var nonsorted = [];
-  for (i = 0; i < length; i++) {
-    nonsorted[i] = parsedjson["Chemikalie"][i]["nazev"];
-  }
-  var sorted = nonsorted.sort(function (a, b) {
-    if (a.toLowerCase() < b.toLowerCase()) return -1;
-    else if (a.toLowerCase() > b.toLowerCase()) return 1;
-    return 0;
-  });
-  for (i = 0; i < length; i++) {
-    var formernum;
-    for (y = 0; y < length; y++) {
-      if (sorted[i] == parsedjson["Chemikalie"][y]["nazev"]) {
-        formernum = y;
+function searchdata(collection) {
+  document.getElementById(collection).innerHTML = "";
+  printids = [];
+  if (alphabetically == true) {
+    var nonsorted = [];
+    for (i = 0; i < length; i++) {
+      nonsorted[i] = parsedjson["Chemikalie"][i]["nazev"];
+    }
+    var sorted = nonsorted.sort(function (a, b) {
+      if (a.toLowerCase() < b.toLowerCase()) return -1;
+      else if (a.toLowerCase() > b.toLowerCase()) return 1;
+      return 0;
+    });
+    for (i = 0; i < length; i++) {
+      var formernum;
+      for (y = 0; y < length; y++) {
+        if (sorted[i] == parsedjson["Chemikalie"][y]["nazev"]) {
+          formernum = y;
+        }
+      }
+      if (collection == "print_results") {
+        document.getElementById(collection).innerHTML += "<a href='#' class='collection-item'><label><input type='checkbox' onClick='saveprint(this.id)' id=" + formernum + " /><span>" + sorted[i] + "</span></label></a>";
+      } else if (collection == "search_results") {
+        document.getElementById(collection).innerHTML += "<a href='index_access.html?index=" + formernum + "' class='collection-item'>" + sorted[i] + "</a>";
       }
     }
-    document.getElementById("search_results").innerHTML += "<a href='index_access.html?index=" + formernum + "' class='collection-item'>" + sorted[i] + "</a>";
+  } else {
+    if (collection == "print_results") {
+      for (i = 0; i < length; i++) {
+        document.getElementById(collection).innerHTML += "<a href='#' class='collection-item'><label><input type='checkbox' onClick='saveprint(this.id)' id=" + i + " /><span>" + parsedjson["Chemikalie"][i]["nazev"] + "</span></label></a>";
+      }
+    } else if (collection = "search_results") {
+      for (i = 0; i < length; i++) {
+        document.getElementById(collection).innerHTML += "<a href='index_access.html?index=" + i + "' class='collection-item'>" + parsedjson["Chemikalie"][i]["nazev"] + "</a>";
+      }
+    }
   }
-} else {
-  for (i = 0; i < length; i++) {
-    document.getElementById("search_results").innerHTML += "<a href='index_access.html?index=" + i + "' class='collection-item'>" + parsedjson["Chemikalie"][i]["nazev"] + "</a>";
+  if (collection == "print_results") {
+    var printmodal = M.Modal.init(document.querySelector('#batchprintmode'));
+    printmodal.open();
+  } else if (collection == "search_results") {
+    console.log("Search data is home, baby!");
   }
 }
-console.log("Search data is home, baby!");
+searchdata("search_results");
 
 var stampok = 0;
 checkstamps();
 setInterval(checkstamps, 60000);
 setInterval(lockdb, 10000);
+webup();
 
-function search_filter() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById('search_bar');
+function search_filter(section) {
+  var input, filter, ul, li, a, i, bar, results;
+  bar = section + "_bar";
+  input = document.getElementById(bar);
   filter = input.value.toUpperCase();
-  div = document.getElementById("search_results");
+  results = section + "_results";
+  div = document.getElementById(results);
   a = div.getElementsByTagName('a');
   for (i = 0; i < a.length; i++) {
       b = a[i];
@@ -168,6 +191,29 @@ function webupdo() {
   document.getElementById("webupbox").style = "display: none";
 }
 
+var printids = [];
+function saveprint(id) {
+  if (printids.length != 0) {
+    var shoda = false;
+    for (i = 0; i < printids.length; i++) {
+      if (id == printids[i]) {
+        shoda = true;
+        var begone = printids.splice(i,1);
+      }
+    }
+    if (shoda == false) {
+      printids.push(id);
+    }
+  } else {
+    printids.push(id);
+  }
+  console.log("Print: " + parsedjson["Chemikalie"][id]["nazev"]);
+}
+function dobatchprint() {
+  localStorage["printids"] = JSON.stringify(printids);
+  window.location.href = "tabletest_batch.html";
+}
+
 var remoteStamp;
 
 function checkstamps(nobox) {
@@ -256,6 +302,11 @@ function setup(setcon) {
     } else {
       configback.weburl = document.getElementById("ip").value;
     }
+    var timestampback = {
+      "timestamp": configback.timestamp
+    }
+    fs.writeFileSync(path.resolve(__dirname, userData + "/timestamp.json"), JSON.stringify(timestampback, null, 2));
+    remoteStamp = configback.timestamp;
     fs.writeFileSync(path.resolve(__dirname, userData + "/config.json"), JSON.stringify(configback, null, 2));
     parsedconfig = configback;
   }
@@ -276,15 +327,40 @@ function setup(setcon) {
     }
   })
   if (setcon == 1 || setcon == 3) {
-    var timestampback = {
-      "timestamp": parsedconfig.timestamp
-    }
     fs.writeFileSync(path.resolve(__dirname, userData + "/version.json"), JSON.stringify(version, null, 2));
     //ftp srandy
     c.on('ready', function() {
       //load em loose files
       if (setcon == 1) {
         c.put(path.resolve(__dirname, userData + "/chemikalie_json.json"), 'chemikalie_json.json', function(err) {
+          if (err) throw err;
+          c.end();
+        });
+        c.mkdir('css', function(err) {
+          if (err) throw err;
+          c.end();
+        });
+        c.mkdir('js', function(err) {
+          if (err) throw err;
+          c.end();
+        });
+        c.mkdir('scripts', function(err) {
+          if (err) throw err;
+          c.end();
+        });
+        c.mkdir('graphics', function(err) {
+          if (err) throw err;
+          c.end();
+        });
+        c.cwd('graphics', function(err) {
+          if (err) throw err;
+          c.end();
+        });
+        c.mkdir('pictograms', function(err) {
+          if (err) throw err;
+          c.end();
+        });
+        c.cdup(function(err) {
           if (err) throw err;
           c.end();
         });
@@ -314,10 +390,6 @@ function setup(setcon) {
         c.end();
       });
       //load css folder
-      c.mkdir('css', function(err) {
-        if (err) throw err;
-        c.end();
-      });
       c.cwd('css', function(err) {
         if (err) throw err;
         c.end();
@@ -335,10 +407,6 @@ function setup(setcon) {
         c.end();
       });
       //load js folder
-      c.mkdir('js', function(err) {
-        if (err) throw err;
-        c.end();
-      });
       c.cwd('js', function(err) {
         if (err) throw err;
         c.end();
@@ -360,10 +428,6 @@ function setup(setcon) {
         c.end();
       });
       //load scripts folder
-      c.mkdir('scripts', function(err) {
-        if (err) throw err;
-        c.end();
-      });
       c.cwd('scripts', function(err) {
         if (err) throw err;
         c.end();
@@ -381,15 +445,15 @@ function setup(setcon) {
         c.end();
       });
       //load graphics folder
-      c.mkdir('graphics', function(err) {
-        if (err) throw err;
-        c.end();
-      });
       c.cwd('graphics', function(err) {
         if (err) throw err;
         c.end();
       });
-      c.mkdir('pictograms', function(err) {
+      c.put(path.resolve(__dirname, "graphics/search_icon.png"), 'search_icon.png', function(err) {
+        if (err) throw err;
+        c.end();
+      });
+      c.put(path.resolve(__dirname, "graphics/logo.svg"), 'logo.svg', function(err) {
         if (err) throw err;
         c.end();
       });
@@ -430,14 +494,6 @@ function setup(setcon) {
         c.end();
       });
       c.put(path.resolve(__dirname, "graphics/pictograms/29.svg"), '29.svg', function(err) {
-        if (err) throw err;
-        c.end();
-      });
-      c.cdup(function(err) {
-        if (err) throw err;
-        c.end();
-      });
-      c.put(path.resolve(__dirname, "graphics/search_icon.png"), 'search_icon.png', function(err) {
         if (err) throw err;
         c.end();
       });

@@ -8,7 +8,9 @@
 </head>
 <body>
 <div class="container">
-  <h1>ChemDB Search</h1>
+  <!--h1>ChemDB Search</h1-->
+  <br>
+  <img src="graphics/logo.svg" width="400px">
   <p id="versiontag">v</p>
 </div>
 
@@ -62,7 +64,7 @@
       </div>
     </div>
   </div>
-  <input type="text" id="search_bar" onkeyup="search_filter()" placeholder="Zadejte název chemikálie" title="Vyhledávač">
+  <input type="text" id="search_bar" onkeyup="search_filter('search')" placeholder="Zadejte název chemikálie" title="Vyhledávač">
   <div class="collection" id="search_results">
   </div>
 </div>
@@ -75,7 +77,8 @@
     <li><a class="btn-floating blue modal-trigger" href="#askmode" style="" id="addbutton"><i class="material-icons">add</i></a></li>
     <li><a class="btn-floating blue modal-trigger" href="#asksetupmode" id="setupmodebutton"><i class="material-icons">backup</i></a></li>
     <li><a class="btn-floating blue modal-trigger" href="#asksetmode" id="setmodebutton"><i class="material-icons">settings</i></a></li>
-    <li><a class="btn-floating blue modal-trigger" href="#lowmode" id="setmodebutton"><i class="material-icons">trending_down</i></a></li>
+    <li><a class="btn-floating blue modal-trigger" href="#lowmode"><i class="material-icons">trending_down</i></a></li>
+    <!--li><a class="btn-floating blue modal-trigger" href="javascript:searchdata('print_results')"><i class="material-icons">print</i></a></li-->
   </ul>
 </div>
 
@@ -233,16 +236,29 @@
 </div>
 
 <div id="lowmode" class="modal">
-    <div class="modal-content">
-      <h4>Docházející chemikálie</h4>
-      <input type="text" id="hranice_edit" onkeyup="javascript:runninglow()" placeholder="Hraniční množství">
-      <!--a class="waves-effect waves-light btn" href="javascript:runninglow()" class="col s6">Filtrovat</a-->
-      <div class="collection" id="low_results"></div>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Konec</a>
+  <div class="modal-content">
+    <h4>Docházející chemikálie</h4>
+    <input type="text" id="hranice_edit" onkeyup="javascript:runninglow()" placeholder="Hraniční množství">
+    <!--a class="waves-effect waves-light btn" href="javascript:runninglow()" class="col s6">Filtrovat</a-->
+    <div class="collection" id="low_results"></div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Konec</a>
+  </div>
+</div>
+
+<div id="batchprintmode" class="modal">
+  <div class="modal-content">
+    <h4>Vytisknout štítky (beta)</h4>
+    <input type="text" id="print_bar" onkeyup="javascript:search_filter('print')" placeholder="Zadejte název chemikálie">
+    <div class="collection" id="print_results">
     </div>
   </div>
+  <div class="modal-footer">
+    <a href="javascript:dobatchprint()" class="modal-close waves-effect waves-green btn-flat">Tisk</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Konec</a>
+  </div>
+</div>
 
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
