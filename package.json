@@ -1,6 +1,6 @@
 {
   "name": "chemdb",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Aimed to show and print school database of chemicals with aditional features.",
   "main": "main.js",
   "scripts": {
@@ -11,7 +11,11 @@
   "build": {
     "appId": "com.chemdb.app",
     "productName": "ChemDB",
-    "asar": false
+    "asar": false,
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   },
   "repository": "https://github.com/Sawy7/chemdb",
   "author": "Jan Němec",
