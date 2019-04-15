@@ -1,6 +1,6 @@
 {
   "name": "chemdb",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Aimed to show and print school database of chemicals with aditional features.",
   "main": "main.js",
   "scripts": {

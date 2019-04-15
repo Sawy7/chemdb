@@ -9,7 +9,7 @@ const userData = app.getPath('userData');
 let mainWindow;
 
 //Čekání na ready
-app.on('ready', function(){
+app.on('ready', function() {
   //check pretty important files
   if (fs.existsSync(path.resolve(__dirname, userData + "/config.json"))) {
   } else {
@@ -53,6 +53,11 @@ app.on('ready', function(){
     slashes: true
   }))
   autoUpdater.checkForUpdates();
+});
+
+app.on('window-all-closed', function(){
+  if(process.platform != 'darwin')
+      app.quit();
 });
 
 // Notifikace pro BrowserWindow
