@@ -6,6 +6,7 @@ const path = require("path");
 const request = require('request');
 const ipcRenderer = require('electron').ipcRenderer;
 const userData = app.getPath('userData');
+var Mousetrap = require('mousetrap');
 
 // wait for an updateReady message
 ipcRenderer.on('updateReady', function(event, text) {
@@ -119,12 +120,14 @@ if (typeof sessionStorage["itwasme"] == "undefined") {
   var itwasme = sessionStorage["itwasme"];
 }
 
+var abandonlock;
 function lockdb() {
   if (parsedconfig["online-component"] == 1) {
     var lockurl = "http://" + parsedconfig.weburl + "/timestamp.json";
     request(lockurl, { json: true }, (err, res, body) => {
       if (err) { return console.log(err); }
       remoteLock = body.lockstamp;
+      abandonlock = body.abandonlock;
       var delta;
       var lastclaim;
       if (typeof remoteLock !== "undefined") {
@@ -139,14 +142,15 @@ function lockdb() {
         sessionStorage["itwasme"] = itwasme;
       }
       console.log("deltasec: " + delta/1000);
-      if (delta > 90000 || itwasme == 1) {
+      if (delta > 90000 || itwasme == 1 || abandonlock == 1) {
         if (itwasme !== 1) {
           itwasme = 1;
           sessionStorage["itwasme"] = itwasme;
         }
         var timestampback = {
           "timestamp": remoteStamp,
-          "lockstamp": Date.now()
+          "lockstamp": Date.now(),
+          "abandonlock": 0
         }
         lastclaim = timestampback.lockstamp;
         fs.writeFileSync(path.resolve(__dirname, userData + "/lastclaim.json"), JSON.stringify(lastclaim, null, 2));
@@ -180,7 +184,7 @@ function webup() {
   request(verurl, { json: true }, (err, res, body) => {
     if (err) { return console.log(err); }
     console.log(body);
-    if (body !== app.getVersion() || body < app.getVersion()) {
+    if (body !== app.getVersion() && body < app.getVersion()) {
       document.getElementById("webupbox").style = "";
     }
   });
@@ -231,10 +235,12 @@ function checkstamps(nobox) {
           document.getElementById("updateboxmsg").innerHTML = "Vzdálená databáze potřebuje aktualizaci.";
           document.getElementById("updateboxlink").href = "javascript:sync('local')";
           document.getElementById("updatebox").style = "";
+          //sync(local); //Automatický upload databáze
         } else if (remoteStamp > parsedconfig.timestamp) {
           document.getElementById("updateboxmsg").innerHTML = "Lokální databáze je zastaralá.";
           document.getElementById("updateboxlink").href = "javascript:sync('remote')";
           document.getElementById("updatebox").style = "";
+          //sync(remote); //Automatický download databáze
         }
       } else if (nobox == true) {
         parsedconfig.timestamp = remoteStamp;
@@ -602,4 +608,37 @@ function runninglow() {
       }
     }
   }
+}
+
+//Keyboard goodness
+Mousetrap.bind("esc", function() { console.log("i haz board supor"); });
+Mousetrap.bind("ctrl+space", function() { console.log("usful shiz vry sun"); });
+
+Mousetrap.bind(";", function() { napoveda_kb(); });
+function napoveda_kb() {
+  var newmodal = M.Modal.init(document.querySelector('#napoveda'));
+  newmodal.open();
+}
+
+Mousetrap.bind("ctrl+n", function() { new_kb(); });
+function new_kb() {
+  var newmodal = M.Modal.init(document.querySelector('#askmode'));
+  newmodal.open();
+}
+
+Mousetrap.bind("ctrl+q", function() { mnozstvi_kb(); });
+function mnozstvi_kb() {
+  var newmodal = M.Modal.init(document.querySelector('#lowmode'));
+  newmodal.open();
+}
+
+Mousetrap.bind("ctrl+l", function() { focus_kb(); });
+function focus_kb() {
+  document.getElementById("search_bar").focus();
+}
+
+Mousetrap.bind("ctrl+i", function() { releasenotes_kb(); });
+function releasenotes_kb() {
+  var newmodal = M.Modal.init(document.querySelector('#releasenotes'));
+  newmodal.open();
 }

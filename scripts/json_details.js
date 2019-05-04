@@ -43,12 +43,14 @@ if (typeof sessionStorage["itwasme"] == "undefined") {
   var itwasme = sessionStorage["itwasme"];
 }
 
+var abandonlock;
 function lockdb() {
   if (parsedconfig["online-component"] == 1) {
     var lockurl = "http://" + parsedconfig.weburl + "/timestamp.json";
     request(lockurl, { json: true }, (err, res, body) => {
       if (err) { return console.log(err); }
       remoteLock = body.lockstamp;
+      abandonlock = body.abandonlock;
       var delta;
       var lastclaim;
       if (typeof remoteLock !== "undefined") {
@@ -57,14 +59,15 @@ function lockdb() {
         delta = 91000;
       }
       console.log("deltasec: " + delta/1000);
-      if (delta > 90000 || itwasme == 1) {
+      if (delta > 90000 || itwasme == 1 || abandonlock == 1) {
         if (itwasme !== 1) {
           itwasme = 1;
           sessionStorage["itwasme"] = itwasme;
         }
         var timestampback = {
           "timestamp": remoteStamp,
-          "lockstamp": Date.now()
+          "lockstamp": Date.now(),
+          "abandonlock": 0
         }
         lastclaim = timestampback.lockstamp;
         fs.writeFileSync(path.resolve(__dirname, userData + "/lastclaim.json"), JSON.stringify(lastclaim, null, 2));
@@ -171,7 +174,7 @@ if (typeof data.poznamkaraw !== "undefined") {
 
 var urlsend;
 if (typeof parsedconfig.weburl !== "undefined") {
-  urlsend = 'https://api.qrserver.com/v1/create-qr-code/?data=' + 'http://' + parsedconfig.weburl + '/index_access.html?index=' + vars["index"] + '&amp;size=50x50';
+  urlsend = 'https://api.qrserver.com/v1/create-qr-code/?data=' + 'http://' + parsedconfig.weburl + '/index_access.html?index=' + vars["index"];
 } else {
   urlsend = 'graphics/qr_error.png'
 }
@@ -181,7 +184,8 @@ data.qrtag = document.getElementById("qrhere").outerHTML;
 localStorage["data"] = JSON.stringify(data);
 
 function print() {
-  document.getElementById("printframe").src = "tabletest.html";
+  //document.getElementById("printframe").src = "tabletest.html";
+  window.location.href = "tabletest.html";
 }
 
 var switches = ["explosive", "flammable", "oxidising", "gasunderpressure", "corrosive", "toxicity", "health", "chronichealth", "environmental"];

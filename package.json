@@ -1,6 +1,6 @@
 {
   "name": "chemdb",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "Aimed to show and print school database of chemicals with aditional features.",
   "main": "main.js",
   "scripts": {
@@ -33,6 +33,7 @@
     "electron-db": "^0.8.1",
     "electron-forge": "^5.2.4",
     "electron-updater": "^4.0.6",
+    "mousetrap": "^1.6.3",
     "node-ftp": "^0.3.10"
   }
 }
