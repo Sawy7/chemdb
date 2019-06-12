@@ -1,3 +1,4 @@
+//All the required components loaded
 const remote = require('electron').remote;
 const app = remote.app;
 var fs = require('fs');
@@ -8,9 +9,10 @@ const ipcRenderer = require('electron').ipcRenderer;
 const userData = app.getPath('userData');
 var Mousetrap = require('mousetrap');
 
-// wait for an updateReady message
+//Searching for upgrades
+//Waiting for an updateReady message
 ipcRenderer.on('updateReady', function(event, text) {
-  // changes the text of the button
+  // Changing the text of the button
   document.getElementById("upgradebox").style = "";
   sessionStorage["update"] = 1;
 })
@@ -28,8 +30,7 @@ if (parsedconfig["online-component"] == 0) {
 }
 document.getElementById("versiontag").innerHTML += app.getVersion();
 
-var myjson = fs.readFileSync(path.resolve(__dirname, userData + "/chemikalie_json.json"));
-var parsedjson = JSON.parse(myjson);
+var parsedjson = JSON.parse(fs.readFileSync(path.resolve(__dirname, userData + "/chemikalie_json.json")));
 var length = parsedjson["Chemikalie"].length;
 var search = [];
 var alphabetically = true;
@@ -215,7 +216,9 @@ function saveprint(id) {
 }
 function dobatchprint() {
   localStorage["printids"] = JSON.stringify(printids);
-  window.location.href = "tabletest_batch.html";
+  localStorage["x_dimension"] = document.getElementById("width").value;
+  localStorage["y_dimension"] = document.getElementById("height").value;
+  window.location.href = "print.html";
 }
 
 var remoteStamp;
@@ -641,4 +644,9 @@ Mousetrap.bind("ctrl+i", function() { releasenotes_kb(); });
 function releasenotes_kb() {
   var newmodal = M.Modal.init(document.querySelector('#releasenotes'));
   newmodal.open();
+}
+
+Mousetrap.bind("ctrl+p", function() { releasenotes_kb(); });
+function releasenotes_kb() {
+  searchdata("print_results");
 }
