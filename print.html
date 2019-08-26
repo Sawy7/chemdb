@@ -1,3 +1,13 @@
+<style>
+  .row {
+    display: flex;
+  }
+  .column {
+    flex: 50%;
+    padding: 10px;
+  }
+</style>
+
 <body onafterprint="escapePrint()">
   <div id="labels"></div>  
 </body>
@@ -19,9 +29,22 @@
     var tablestruc = '<table class="tabulka" style="width: ' + localStorage["x_dimension"] + 'cm; height: ' + localStorage["y_dimension"] + 'cm; border: 1px solid black"><tr><td id="qr"></td><td id="nazev" class="text"><br></td></tr><tr><td id="pictograms" colspan="2"></td></tr></table>'
     var printids = JSON.parse(localStorage["printids"]);
     localStorage["printids"] = "";
+    if (localStorage["x_dimension"] <= 10) {
+      document.getElementById("labels").innerHTML = "<div id='c0' class='column'></div><div id='c1' class='column'></div>";
+      document.getElementById("labels").className = "row"
+    }
     for (i = 0; i < printids.length; i++) {
+      if (localStorage["x_dimension"] <= 10) {
+        if (i % 2 == 0) {
+          label_position = "c0";
+        } else {
+          label_position = "c1"
+        }
+      } else {
+        label_position = "labels";
+      }
       var x = parsedjson["Chemikalie"][printids[i]];
-      document.getElementById("labels").innerHTML += tablestruc;
+      document.getElementById(label_position).innerHTML += tablestruc;
       var data = {
         nazev: "<b>" + x["nazev"] + "</b>",
         cistota: x["cistota"],
@@ -57,7 +80,7 @@
       document.getElementById("qr").id = "";
       document.getElementById("pictograms").innerHTML = data.pictograms;
       document.getElementById("pictograms").id = "";
-      document.getElementById("labels").innerHTML += "<br>";
+      document.getElementById(label_position).innerHTML += "<br>";
       if (localStorage["x_dimension"] < 7 || localStorage["y_dimension"] < 6) {
         document.getElementsByClassName("poznamkaraw")[i].style = "font-size: 6pt";
         console.log("male");
