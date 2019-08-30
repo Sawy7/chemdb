@@ -1,0 +1,105 @@
+<style>
+  .row {
+    display: flex;
+  }
+  .column {
+    flex: 50%;
+    padding: 10px;
+  }
+  p {
+    margin-top: 2px;
+    margin-bottom: 2px
+  }
+</style>
+
+<body onafterprint="escapePrint()">
+  <div id="labels"></div>  
+</body>
+
+<script>
+
+    //Load the database
+    var parsedjson = JSON.parse(localStorage["parsedjson"]);
+
+    //Create basic table structure
+    var tablestruc = '<table class="tabulka" style="width: ' + localStorage["x_dimension"] + 'cm; height: ' + localStorage["y_dimension"] + 'cm; border: 1px solid black"><tr><td id="qr"></td><td id="nazev" class="text"><br></td></tr><tr><td id="pictograms" colspan="2"></td></tr></table>'
+    var printids = JSON.parse(localStorage["printids"]);
+    localStorage["printids"] = "";
+    if (localStorage["x_dimension"] <= 10) {
+      document.getElementById("labels").innerHTML = "<div id='c0' class='column'></div><div id='c1' class='column'></div>";
+      document.getElementById("labels").className = "row"
+    }
+    for (i = 0; i < printids.length; i++) {
+      if (localStorage["x_dimension"] <= 10) {
+        if (i % 2 == 0) {
+          label_position = "c0";
+        } else {
+          label_position = "c1"
+        }
+      } else {
+        label_position = "labels";
+      }
+      var x = parsedjson["Chemikalie"][printids[i]];
+      document.getElementById(label_position).innerHTML += tablestruc;
+      var data = {
+        nazev: "<p id='nazev'><b>" + x["nazev"] + "</b></p>",
+        cistota: "<p>" + x["cistota"] + "<p>",
+        poznamkaraw: x["poznamka"],
+        qrtag: "",
+        pictograms: "",
+        molarnih: ""
+      }
+      var qrurl;
+      qrurl = 'https://api.qrserver.com/v1/create-qr-code/?data=' + 'http://' + document.location.origin + '/index_access.html?index=' + printids[i];
+      data.qrtag = '<img id="qrhere" src="' + qrurl + '" style="max-width: ' + localStorage["x_dimension"]/3 + 'cm; max-height:' + localStorage["y_dimension"]*(2/3) + 'cm">';
+      var pictograms = [x["explosive"], x["flammable"], x["oxidising"], x["gasunderpressure"], x["corrosive"], x["toxicity"], x["health"], x["chronichealth"], x["environmental"]];
+      var pictonumbers = [13, 15, 17, 19, 21, 23, 25, 27, 29];
+      for (y = 0; y < pictograms.length; y++) {
+        if (pictograms[y] != 0) {
+          data.pictograms += "<img src='graphics/pictograms/" + pictonumbers[y] + ".svg' style='max-height:" + document.getElementById("pictograms").clientHeight/2 + "'>";
+        }
+      }
+      document.getElementById("nazev").innerHTML = data.nazev
+      document.getElementById("nazev").innerHTML += data.molarnih;
+      document.getElementById("nazev").innerHTML += data.cistota;
+      if (data.poznamkaraw != undefined) {
+        document.getElementById("nazev").innerHTML += "<p id='poznamkaraw'>" + data.poznamkaraw + "</p>";
+      } else {
+        document.getElementById("nazev").innerHTML += "<p id='poznamkaraw'></p>";
+      }
+      document.getElementById("nazev").id = "";
+      document.getElementById("qr").innerHTML = data.qrtag;
+      document.getElementById("qr").style = "width: " + localStorage["y_dimension"]*(2/3) + "px";
+      document.getElementById("qr").id = "";
+      if (data.pictograms != "") {
+        document.getElementById("pictograms").innerHTML = data.pictograms;
+        document.getElementById("pictograms").id = "";
+      } else {
+        document.getElementById("pictograms").remove();
+      }      
+      document.getElementById(label_position).innerHTML += "<br>";
+
+      if (localStorage["x_dimension"] < 7 || localStorage["y_dimension"] < 6) {
+        document.getElementById("poznamkaraw").style = "font-size: 6pt";
+        document.getElementById("poznamkaraw").id = "";
+      } else {
+        document.getElementsByClassName("poznamkaraw")[i].style = "font-size: 12pt";
+      }
+      if (localStorage["x_dimension"] > 9) {
+        document.getElementById("nazev").style = "font-size: 25pt";
+      }
+      document.getElementById("nazev").id = "";
+    }
+    
+    var red_location;
+    if (printids.length > 1) {
+      red_location = "index.html";
+    } else {
+      red_location = "index_access.html?index=" + printids[0];
+    }
+
+    window.print();
+    function escapePrint() {
+      window.location.href = red_location;
+    }
+  </script>

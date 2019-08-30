@@ -93,12 +93,16 @@ xmlhttp.onreadystatechange = function() {
     data.qrtag = document.getElementById("qrhere").outerHTML;
 
     localStorage["data"] = JSON.stringify(data);
+    localStorage["parsedjson"] = JSON.stringify(parsedjson);
   }
 };
 xmlhttp.open("GET", "../chemikalie_json.json", true);
 xmlhttp.send();
 
 function print() {
-  document.getElementById("printframe").src = "tabletest.html";
-  //window.location.href = "tabletest.html";
+  var printids = [vars["index"]];
+  localStorage["printids"] = JSON.stringify(printids);
+  localStorage["x_dimension"] = document.getElementById("width").value;
+  localStorage["y_dimension"] = document.getElementById("height").value;
+  window.location.href = "print.html";
 }

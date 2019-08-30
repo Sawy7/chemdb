@@ -32,6 +32,25 @@
 
           <br>
           <span id="card-pictograms"></span>
+          <ul class="collapsible" style="padding-bottom: 0px;margin-bottom: 0px">
+            <li>
+              <div class="collapsible-header"><i class="material-icons">print</i>Tisk</div>
+              <div class="collapsible-body row">
+                <div class="input-field col s6">
+                  <input id="width" type="text" value="5">
+                  <label for="width" id="width_label">Šířka (cm)</label>
+                </div>
+                <div class="input-field col s6">
+                  <input id="height" type="text" value="3">
+                  <label for="height" id="height_label">Výška (cm)</label>
+                </div>
+                <br>
+                <div class=>
+                  <a class="waves-effect waves-light btn" href="javascript:print()">Tisknout</a>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
         <div class="card-action" id="links">
           <a href="index.html">Zpět</a>
@@ -40,9 +59,13 @@
       </div>
     </div>
 </div>
-<iframe id="printframe" style="display: none"></iframe>
 <script type="text/javascript" src="scripts/json_details.js"></script>
 <script>
+//collapsible
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+  });
 /*
 //vypocet a vyplneni molarni hmotnosti pomoci vypoctu ze vzorce (hodnoty: http://galerie2.sweb.cz/prvky.htm)
 var molarint = 0;

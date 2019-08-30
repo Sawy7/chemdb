@@ -184,7 +184,7 @@ data.qrtag = document.getElementById("qrhere").outerHTML;
 localStorage["data"] = JSON.stringify(data);
 
 function print() {
-  printids = [vars["index"]];
+  var printids = [vars["index"]];
   localStorage["printids"] = JSON.stringify(printids);
   localStorage["x_dimension"] = document.getElementById("width").value;
   localStorage["y_dimension"] = document.getElementById("height").value;
