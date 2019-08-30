@@ -1,18 +1,31 @@
 ChemDB
 ==
-Projekt pro správu databáze chemikálií ve školním skladu
+Projekt pro správu databáze chemikálií nejen ve školním skladu.
 
 Funkce
 --
-- Načítání databáze chemikálií z JSON souboru (jako databáze)
-- Vyhledávání v databázi
-- Databáze GHS vět a piktogramů
-- Automatická tvorba štítků na obaly chemikálií
-- Generování QR kódu pro návrat do aplikace
-- Rozhraní vhodné pro desktop i mobilní zařízení
+- Správa databáze chemikálií v JSON souboru
+- Zobrazení detailních informací o jednotlivých chemikáliích a možnost jejich úpravy
+- Online instance sloužící pro přístup z jakéhokoliv zařízení a jako záloha lokální databáze
+- Synchronizace mezi několika instalacemi na různých PC
+- Generování QR kódů pro jednoduchý přístup k dané chemikálii
+- Automatické přiřazování GHS piktogramů na základě H a P vět
+- Automatická instalace online instance přímo z programu
+- Automatické aktualizace lokální a online instance
+- Tisk štítků k označení kontejnerů s chemikáliemi
 
-To-Do
---
-- Dokončení a odladění automatického doplňování molární hmotnosti
+## Instalace
 
->Projekt je ve fázi raného vývoje. Něco nefunguje, něco vůbec ne.
+| Operační systém | Metoda instalace                                             |
+| --------------- | ------------------------------------------------------------ |
+| Windows         | Instalační soubor na stránce [Releases](https://github.com/Sawy7/chemdb/releases) |
+| Linux           | Zatím pouze kompilací ze zdrojového kódu                     |
+| macOS           | Zatím pouze kompilací ze zdrojového kódu                     |
+
+## Snímky obrazovky
+
+![1567151015237](https://i.imgur.com/EL1MQwp.png)
+
+![1567151015237](https://i.imgur.com/Wbdzhlm.png)
+
+![1567151015237](https://i.imgur.com/k6GFv2h.png)
