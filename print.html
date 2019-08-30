@@ -6,6 +6,10 @@
     flex: 50%;
     padding: 10px;
   }
+  p {
+    margin-top: 2px;
+    margin-bottom: 2px
+  }
 </style>
 
 <body onafterprint="escapePrint()">
@@ -46,8 +50,8 @@
       var x = parsedjson["Chemikalie"][printids[i]];
       document.getElementById(label_position).innerHTML += tablestruc;
       var data = {
-        nazev: "<b>" + x["nazev"] + "</b>",
-        cistota: x["cistota"],
+        nazev: "<p id='nazev'><b>" + x["nazev"] + "</b></p>",
+        cistota: "<p>" + x["cistota"] + "<p>",
         poznamkaraw: x["poznamka"],
         qrtag: "",
         pictograms: "",
@@ -59,7 +63,7 @@
       } else {
         qrurl = 'graphics/qr_error.png'
       }
-      data.qrtag = '<img id="qrhere" src="' + qrurl + '" style="max-width: ' + localStorage["x_dimension"]/3 + 'cm">'
+      data.qrtag = '<img id="qrhere" src="' + qrurl + '" style="max-width: ' + localStorage["x_dimension"]/3 + 'cm; max-height:' + localStorage["y_dimension"]*(2/3) + 'cm">';
       var pictograms = [x["explosive"], x["flammable"], x["oxidising"], x["gasunderpressure"], x["corrosive"], x["toxicity"], x["health"], x["chronichealth"], x["environmental"]];
       var pictonumbers = [13, 15, 17, 19, 21, 23, 25, 27, 29];
       for (y = 0; y < pictograms.length; y++) {
@@ -69,24 +73,34 @@
       }
       document.getElementById("nazev").innerHTML = data.nazev
       document.getElementById("nazev").innerHTML += data.molarnih;
-      document.getElementById("nazev").innerHTML += "<br>" + data.cistota;
+      document.getElementById("nazev").innerHTML += data.cistota;
       if (data.poznamkaraw != undefined) {
-        document.getElementById("nazev").innerHTML += "<p class='poznamkaraw'>" + data.poznamkaraw + "</p>";
+        document.getElementById("nazev").innerHTML += "<p id='poznamkaraw'>" + data.poznamkaraw + "</p>";
       } else {
-        document.getElementById("nazev").innerHTML += "<p class='poznamkaraw'></p>";
+        document.getElementById("nazev").innerHTML += "<p id='poznamkaraw'></p>";
       }
       document.getElementById("nazev").id = "";
       document.getElementById("qr").innerHTML = data.qrtag;
+      document.getElementById("qr").style = "width: " + localStorage["y_dimension"]*(2/3) + "px";
       document.getElementById("qr").id = "";
-      document.getElementById("pictograms").innerHTML = data.pictograms;
-      document.getElementById("pictograms").id = "";
-      document.getElementById(label_position).innerHTML += "<br>";
-      if (localStorage["x_dimension"] < 7 || localStorage["y_dimension"] < 6) {
-        document.getElementsByClassName("poznamkaraw")[i].style = "font-size: 6pt";
-        console.log("male");
+      if (data.pictograms != "") {
+        document.getElementById("pictograms").innerHTML = data.pictograms;
+        document.getElementById("pictograms").id = "";
       } else {
-        document.getElementsByClassName("poznamkaraw").style = "font-size: 12pt";
+        document.getElementById("pictograms").remove();
+      }      
+      document.getElementById(label_position).innerHTML += "<br>";
+
+      if (localStorage["x_dimension"] < 7 || localStorage["y_dimension"] < 6) {
+        document.getElementById("poznamkaraw").style = "font-size: 6pt";
+        document.getElementById("poznamkaraw").id = "";
+      } else {
+        document.getElementsByClassName("poznamkaraw")[i].style = "font-size: 12pt";
       }
+      if (localStorage["x_dimension"] > 9) {
+        document.getElementById("nazev").style = "font-size: 25pt";
+      }
+      document.getElementById("nazev").id = "";
     }
     
     setTimeout(function () { window.print(); }, 500);

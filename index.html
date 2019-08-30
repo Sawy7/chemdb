@@ -74,12 +74,13 @@
     <i class="large material-icons">menu</i>
   </a>
   <ul>
-    <li><a class="btn-floating blue modal-trigger" href="#askmode" style="" id="addbutton"><i class="material-icons">add</i></a></li>
-    <li><a class="btn-floating blue modal-trigger" href="#asksetupmode" id="setupmodebutton"><i class="material-icons">backup</i></a></li>
-    <li><a class="btn-floating blue modal-trigger" href="#asksetmode" id="setmodebutton"><i class="material-icons">settings</i></a></li>
-    <li><a class="btn-floating blue modal-trigger" href="#lowmode"><i class="material-icons">trending_down</i></a></li>
-    <li><a class="btn-floating blue modal-trigger" href="#releasenotes"><i class="material-icons">assignment</i></a></li>
-    <li><a class="btn-floating blue modal-trigger" href="javascript:searchdata('print_results')"><i class="material-icons">print</i></a></li>
+    <li><a class="btn-floating blue modal-trigger tooltipped" href="#askmode" style="" id="addbutton" data-tooltip="Přidat"><i class="material-icons">add</i></a></li>
+    <li><a class="btn-floating blue modal-trigger tooltipped" href="#asksetupmode" id="setupmodebutton" data-tooltip="Nastavit webovou instanci"><i class="material-icons">backup</i></a></li>
+    <li><a class="btn-floating blue modal-trigger tooltipped" href="#asksetmode" id="setmodebutton" data-tooltip="Upravit nastavení FTP"><i class="material-icons">settings</i></a></li>
+    <li><a class="btn-floating blue modal-trigger tooltipped" href="#lowmode" data-tooltip="Docházející chemikálie"><i class="material-icons">trending_down</i></a></li>
+    <li><a class="btn-floating blue modal-trigger tooltipped" href="#releasenotes" data-tooltip="Změny v posledních verzích"><i class="material-icons">assignment</i></a></li>
+    <li><a class="btn-floating blue modal-trigger tooltipped" href="#ghsforall" data-tooltip="Automatické určení GHS piktogramů"><i class="material-icons">label_outline</i></a></li>
+    <li><a class="btn-floating blue modal-trigger tooltipped" href="javascript:searchdata('print_results')" data-tooltip="Tisk štítků"><i class="material-icons">print</i></a></li>
   </ul>
 </div>
 
@@ -236,6 +237,17 @@
   </div>
 </div>
 
+<div id="ghsforall" class="modal bottom-sheet">
+    <div class="modal-content">
+      <h4>Automatické určení GHS piktogramů</h4>
+      <p>Tato funkce automaticky určí, které GHS piktogramy jsou přiřazeny ke každé chemikálii v databázi. Spuštění tohoto procesu přepíše jakékoliv předchozí manuálně zvolené hodnoty - záloha je více než doporučena.</p>
+    </div>
+    <div class="modal-footer">
+      <a href="javascript:ghsforall()" class="modal-trigger modal-close waves-effect waves-green btn-flat">Pokračovat</a>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Zahodit</a>
+    </div>
+  </div>
+
 <div id="lowmode" class="modal">
   <div class="modal-content">
     <h4>Docházející chemikálie</h4>
@@ -248,24 +260,28 @@
   </div>
 </div>
 
-<div id="batchprintmode" class="modal">
+<div id="batchprintmode" class="modal modal-fixed-footer">
   <div class="modal-content">
     <h4>Vytisknout štítky (beta)</h4>
-    <input type="text" id="print_bar" onkeyup="javascript:search_filter('print')" placeholder="Zadejte název chemikálie">
+    
+    <div class="row">
+      <div class="input-field col s8">
+          <input type="text" id="print_bar" onkeyup="javascript:search_filter('print')" placeholder="Zadejte název chemikálie">
+      </div>
+      <div class="input-field col s2">
+          <input id="width" type="text" value="5">
+          <label for="width" id="width_label">Šířka (cm)</label>
+        </div>
+        <div class="input-field col s2">
+            <input id="height" type="text" value="3">
+            <label for="height" id="height_label">Výška (cm)</label>
+        </div>
+  </div>
     <div class="collection" id="print_results">
     </div>
   </div>
   <div class="modal-footer">
-    <div class="row">
-        <div class="input-field col s2">
-            <input id="width" type="text" value="5">
-            <label for="width" id="width_label">Šířka (cm)</label>
-          </div>
-          <div class="input-field col s2">
-              <input id="height" type="text" value="3">
-              <label for="height" id="height_label">Výška (cm)</label>
-        </div>
-    </div>
+    
     <a href="javascript:dobatchprint()" class="modal-close waves-effect waves-green btn-flat">Tisk</a>
     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Konec</a>
   </div>
@@ -274,8 +290,8 @@
 <div id="releasenotes" class="modal">
   <div class="modal-content">
     <h4>Změny v posledních verzích</h4>
-      <div class="chip">0.2.5</div>
-      Přidání automatického rozpoznání možnosti tisku více štítků vedle sebe a další drobné optimalizace.
+      <div class="chip">0.3.0</div>
+      Přidání automatického rozpoznání možnosti tisku více štítků vedle sebe a další optimalizace tisku, možnost automaticky určit GHS piktogramy u celé databáze najednou, oprava mizejícího tlačítka k přidání chemikálií a přidání textu do hlavního menu.
       <br>
       <div class="chip">0.2.4</div>
       Přidání nového způsobu tisku (indev) a podpory pro klávesové zkratky.
@@ -332,7 +348,8 @@
       hoverEnabled: false
     });
   });
-
+  var elems = document.querySelectorAll('.tooltipped');
+  var instances = M.Tooltip.init(elems, {position: "left"});
 </script>
 </body>
 </html>

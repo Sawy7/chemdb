@@ -165,7 +165,9 @@ function lockdb() {
       	});
       	c.connect({host: parsedconfig["ip"], user: parsedconfig["user"], password: parsedconfig["password"]});
         document.getElementById("lockbox").style = "display: none";
-        document.getElementById("addbutton").style = "";
+        if (document.getElementById("addbutton").style == "display: none") {
+          document.getElementById("addbutton").style = "";
+        }
       } else {
         document.getElementById("lockbox").style = "";
         document.getElementById("addbutton").style = "display: none";
@@ -175,7 +177,9 @@ function lockdb() {
     });
   }
   else {
-    document.getElementById("addbutton").style = "";
+    if (document.getElementById("addbutton").style == "display: none") {
+      document.getElementById("addbutton").style = "";
+    }
   }
   stampok = 1;
 }
@@ -613,6 +617,49 @@ function runninglow() {
   }
 }
 
+//Automat for all
+function ghsforall() {
+  var parsedStatements = JSON.parse(fs.readFileSync(path.resolve(__dirname, "statements_json.json")));
+  var statementsLength = parsedStatements["Statements"].length;
+  var switches = ["explosive", "flammable", "oxidising", "gasunderpressure", "corrosive", "toxicity", "health", "chronichealth", "environmental"];
+  var values = ["0", "0", "0", "0", "0", "0", "0", "0", "0"];
+  for (y = 0; y < length; y++) {
+    for (i = 0; i < 9; i++) {
+      values[i] = "0";
+    }
+    var poznamkaraw_ghs = parsedjson["Chemikalie"][y]["poznamka"];
+    if (typeof poznamkaraw_ghs !== "undefined") {
+      for (i = 0; i < statementsLength; i++) {
+        currentStatement = parsedStatements["Statements"][i]["code"];
+        if (poznamkaraw_ghs.includes(currentStatement) || poznamkaraw_ghs.includes(currentStatement.replace(/\s/g, ''))) {
+          if (poznamkaraw_ghs.includes(currentStatement + " +") || poznamkaraw_ghs.includes(currentStatement + "+") || poznamkaraw_ghs.includes("+ " + currentStatement) || poznamkaraw_ghs.includes("+" + currentStatement)) {
+          }
+          else {
+            for (z = 0; z < switches.length; z++) {
+              if (parsedStatements["Statements"][i]["pictogram"] == switches[z]) {
+                values[z] = "1";
+              }
+            }
+            if (parsedStatements["Statements"][i]["pictogram"] == "explosive_flammable") {
+              values[0] = "1";
+              values[1] = "1";
+            }
+          }
+        }
+      }
+    }
+    for (i = 0; i < 9; i++) {
+      if (values[i] == "1") {
+        parsedjson["Chemikalie"][y][switches[i]] = "1";
+      } else {
+        parsedjson["Chemikalie"][y][switches[i]] = "0";
+      }
+    }
+    fs.writeFileSync(path.resolve(__dirname, userData + "/chemikalie_json.json"), JSON.stringify(parsedjson, null, 2));
+  }
+  console.log("success");  
+}
+
 //Keyboard goodness
 Mousetrap.bind("esc", function() { console.log("i haz board supor"); });
 Mousetrap.bind("ctrl+space", function() { console.log("usful shiz vry sun"); });
@@ -649,4 +696,9 @@ function releasenotes_kb() {
 Mousetrap.bind("ctrl+p", function() { releasenotes_kb(); });
 function releasenotes_kb() {
   searchdata("print_results");
+}
+
+function status_toast() {
+  M.toast({html: "<i class='material-icons'>network_wifi</i> ChemDB je online"});
+  M.toast({html: "<i class='material-icons'>airplanemode_active</i> Bez připojení k serveru"});
 }
