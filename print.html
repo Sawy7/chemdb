@@ -103,6 +103,13 @@
       document.getElementById("nazev").id = "";
     }
     
+    var red_location;
+    if (printids.length > 1) {
+      red_location = "index.html";
+    } else {
+      red_location = "index_access.html?index=" + printids[0];
+    }
+
     setTimeout(function () { window.print(); }, 500);
-    window.onfocus = function () { setTimeout(function () { window.location.href = "index.html"; }, 500); }
+    window.onfocus = function () { setTimeout(function () { window.location.href = red_location; }, 500); }
   </script>

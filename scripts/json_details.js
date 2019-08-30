@@ -129,7 +129,7 @@ for (i = 0; i < data.vzorec.length; i++) {
   }
   vzorecformated += char;
 }
-document.getElementById("nazev").innerHTML = "<h3>" + data.nazev + "</h3>" + " " + vzorecformated;
+document.getElementById("nazev").innerHTML = "<h3 style='margin-top: 0px'>" + data.nazev + "</h3>" + " " + vzorecformated;
 if (data.trivialne != "(-)") {
   document.getElementById("nazev").innerHTML += " " + data.trivialne;
 }
@@ -184,8 +184,11 @@ data.qrtag = document.getElementById("qrhere").outerHTML;
 localStorage["data"] = JSON.stringify(data);
 
 function print() {
-  //document.getElementById("printframe").src = "tabletest.html";
-  window.location.href = "tabletest.html";
+  printids = [vars["index"]];
+  localStorage["printids"] = JSON.stringify(printids);
+  localStorage["x_dimension"] = document.getElementById("width").value;
+  localStorage["y_dimension"] = document.getElementById("height").value;
+  window.location.href = "print.html";
 }
 
 var switches = ["explosive", "flammable", "oxidising", "gasunderpressure", "corrosive", "toxicity", "health", "chronichealth", "environmental"];
