@@ -64,9 +64,24 @@
       </div>
     </div>
   </div>
-  <input type="text" id="search_bar" onkeyup="search_filter('search')" placeholder="Zadejte název chemikálie" title="Vyhledávač">
-  <div class="collection" id="search_results">
-  </div>
+  <div class="row">
+      <div class="col s12">
+        <ul class="tabs" id="elem">
+          <li class="tab col s6"><a class="active" href="#searchtab">Vyhledávání</a></li>
+          <li class="tab col s6"><a href="#newtab">Nejnovější</a></li>
+        </ul>
+      </div>
+      <div id="searchtab" class="col s12">
+        <input type="text" id="search_bar" onkeyup="search_filter('search')" placeholder="Zadejte název chemikálie" title="Vyhledávač">
+        <div class="collection" id="search_results">
+        </div>
+      </div>
+      <div id="newtab" class="col s12">
+        <div class="collection" id="latest_results"></div>
+        <center><p>Poslední přidané záznamy</p></center>
+      </div>      
+    </div>
+  
 </div>
 
 <div class="fixed-action-btn">
@@ -290,6 +305,9 @@
 <div id="releasenotes" class="modal">
   <div class="modal-content">
     <h4>Změny v posledních verzích</h4>
+      <div class="chip">0.3.1</div>
+      Nová kategorie "Nejnovější", která ukazuje poslední chemikálie přidané do databáze.
+      <br>
       <div class="chip">0.3.0</div>
       Přidání automatického rozpoznání možnosti tisku více štítků vedle sebe a další optimalizace tisku, možnost automaticky určit GHS piktogramy u celé databáze najednou, oprava mizejícího tlačítka k přidání chemikálií a přidání textu do hlavního menu.
       <br>
@@ -350,6 +368,7 @@
   });
   var elems = document.querySelectorAll('.tooltipped');
   var instances = M.Tooltip.init(elems, {position: "left"});
+  var instance = M.Tabs.init(elem);
 </script>
 </body>
 </html>

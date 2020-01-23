@@ -32,6 +32,12 @@ xmlhttp.onreadystatechange = function() {
         document.getElementById("search_results").innerHTML += "<a href='index_access.html?index=" + i + "' class='collection-item'>" + parsedjson["Chemikalie"][i]["nazev"] + "</a>";
       }
     }
+    
+    //latest results pull
+    for (i = (length-1); i > (length-11); i--) {
+      document.getElementById("latest_results").innerHTML += "<a href='index_access.html?index=" + i + "' class='collection-item'>" + parsedjson["Chemikalie"][i]["nazev"] + "</a>";
+    }
+
     console.log("Search data is home, baby!");
     localStorage["parsedjson"] = JSON.stringify(parsedjson);
   }

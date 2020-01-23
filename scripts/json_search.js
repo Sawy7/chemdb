@@ -78,7 +78,16 @@ function searchdata(collection) {
     console.log("Search data is home, baby!");
   }
 }
+
+function latest_results() {
+  for (i = (length-1); i > (length-11); i--) {
+    document.getElementById("latest_results").innerHTML += "<a href='index_access.html?index=" + i + "' class='collection-item'>" + parsedjson["Chemikalie"][i]["nazev"] + "</a>";
+  }
+  
+}
+
 searchdata("search_results");
+latest_results();
 
 var stampok = 0;
 checkstamps();
@@ -349,22 +358,13 @@ function setup(setcon) {
           if (err) throw err;
           c.end();
         });
-        c.mkdir('css', function(err) {
-          if (err) throw err;
-          c.end();
-        });
-        c.mkdir('js', function(err) {
-          if (err) throw err;
-          c.end();
-        });
-        c.mkdir('scripts', function(err) {
-          if (err) throw err;
-          c.end();
-        });
-        c.mkdir('graphics', function(err) {
-          if (err) throw err;
-          c.end();
-        });
+        var mkdir = ["css", "js", "scripts", "graphics"];
+        for (var i = 0; i < mkdir.length; i++) {
+          c.mkdir(mkdir[i], function(err) {
+            if (err) throw err;
+            c.end();
+          });  
+        }
         c.cwd('graphics', function(err) {
           if (err) throw err;
           c.end();
@@ -474,42 +474,13 @@ function setup(setcon) {
         if (err) throw err;
         c.end();
       });
-      c.put(path.resolve(__dirname, "graphics/pictograms/13.svg"), '13.svg', function(err) {
-        if (err) throw err;
-        c.end();
-      });
-      c.put(path.resolve(__dirname, "graphics/pictograms/15.svg"), '15.svg', function(err) {
-        if (err) throw err;
-        c.end();
-      });
-      c.put(path.resolve(__dirname, "graphics/pictograms/17.svg"), '17.svg', function(err) {
-        if (err) throw err;
-        c.end();
-      });
-      c.put(path.resolve(__dirname, "graphics/pictograms/19.svg"), '19.svg', function(err) {
-        if (err) throw err;
-        c.end();
-      });
-      c.put(path.resolve(__dirname, "graphics/pictograms/21.svg"), '21.svg', function(err) {
-        if (err) throw err;
-        c.end();
-      });
-      c.put(path.resolve(__dirname, "graphics/pictograms/23.svg"), '23.svg', function(err) {
-        if (err) throw err;
-        c.end();
-      });
-      c.put(path.resolve(__dirname, "graphics/pictograms/25.svg"), '25.svg', function(err) {
-        if (err) throw err;
-        c.end();
-      });
-      c.put(path.resolve(__dirname, "graphics/pictograms/27.svg"), '27.svg', function(err) {
-        if (err) throw err;
-        c.end();
-      });
-      c.put(path.resolve(__dirname, "graphics/pictograms/29.svg"), '29.svg', function(err) {
-        if (err) throw err;
-        c.end();
-      });
+      var pictograms_upload = ["13.svg", "15.svg", "17.svg", "19.svg", "21.svg", "23.svg", "25.svg", "27.svg", "29.svg"];
+      for (var i = 0; i < pictograms_upload.length; i++) {
+        c.put(path.resolve(__dirname, "graphics/pictograms/" + pictograms_upload[i]), pictograms_upload[i], function(err) {
+          if (err) throw err;
+          c.end();
+        });
+      }
     });
     c.connect({host: parsedconfig["ip"], user: parsedconfig["user"], password: parsedconfig["password"]});
     console.log("instalace, yes");
