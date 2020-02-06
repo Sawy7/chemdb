@@ -231,7 +231,7 @@ function dobatchprint() {
   localStorage["printids"] = JSON.stringify(printids);
   localStorage["x_dimension"] = document.getElementById("width").value;
   localStorage["y_dimension"] = document.getElementById("height").value;
-  window.location.href = "print.html";
+  window.location.href = "alpha.html";
 }
 
 var remoteStamp;
@@ -394,7 +394,7 @@ function setup(setcon) {
         if (err) throw err;
         c.end();
       });
-      c.put(path.resolve(__dirname, "tabletest.html"), 'tabletest.html', function(err) {
+      c.put(path.resolve(__dirname, "print.html"), 'print.html', function(err) {
         if (err) throw err;
         c.end();
       });
@@ -647,7 +647,7 @@ function new_kb() {
   newmodal.open();
 }
 
-Mousetrap.bind("ctrl+q", function() { mnozstvi_kb(); });
+Mousetrap.bind("ctrl+o", function() { mnozstvi_kb(); });
 function mnozstvi_kb() {
   var newmodal = M.Modal.init(document.querySelector('#lowmode'));
   newmodal.open();
@@ -664,8 +664,8 @@ function releasenotes_kb() {
   newmodal.open();
 }
 
-Mousetrap.bind("ctrl+p", function() { releasenotes_kb(); });
-function releasenotes_kb() {
+Mousetrap.bind("ctrl+p", function() { printing_kb(); });
+function printing_kb() {
   searchdata("print_results");
 }
 

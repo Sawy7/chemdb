@@ -1,4 +1,20 @@
+
+<!--EXPERMENTAL - IF NEED BE, REVERT FROM GITHUB-->
 <style>
+  body {  
+    width: 21cm;
+    height: 29.7cm;
+    margin: 0px;
+  }
+  @page {
+    width: 21cm;
+    height: 29.7cm;
+    margin: 0px;
+  }
+  ::selection {
+    color: none;
+    background: none;
+  }
   .row {
     display: flex;
   }
@@ -10,19 +26,86 @@
     margin-top: 2px;
     margin-bottom: 2px
   }
+
+  #mydiv 
+  {
+    position: absolute;
+    z-index: 9;
+    background-color: #f1f1f1;
+    border: 1px solid #d3d3d3;
+    text-align: center;
+    cursor: move;
+    top: 0;
+    left: 0;
+  }
+
+  table
+  {
+    position: absolute;
+    border: 1px solid black;
+    cursor: hand;
+  }
+
+  .selected
+  {
+    background-color: #a7f2aa;
+  }
 </style>
 
 <body onafterprint="escapePrint()">
-  <div id="labels"></div>  
+  <div id="labels"></div>
+  <div id="mydiv" style="display: none">
+    <p>RANDOM OBJECT</p>
+  </div>  
 </body>
 
 <script>
+    //new dragging
+    dragElement(document.getElementById("mydiv"));
+    function dragElement(elmnt) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        elmnt.onmousedown = dragMouseDown;
+
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        console.log("co je e?: " + e);
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+      }
+
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        //console.log("x: " + pos3 + "; y: " + pos4);
+      }
+
+      function closeDragElement() {
+        // stop moving when mouse button is released:
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+
     //All the required components loaded
     const remote = require('electron').remote;
     const app = remote.app;
     var fs = require('fs');
     const path = require("path");
     const userData = app.getPath('userData');
+    const { ipcRenderer } = require('electron');
 
     //Load the database
     var parsedjson = JSON.parse(fs.readFileSync(path.resolve(__dirname, userData + "/chemikalie_json.json")));
@@ -30,25 +113,14 @@
     var parsedconfig = JSON.parse(fs.readFileSync(path.resolve(__dirname, userData + "/config.json")));
 
     //Create basic table structure
-    var tablestruc = '<table class="tabulka" style="width: ' + localStorage["x_dimension"] + 'cm; height: ' + localStorage["y_dimension"] + 'cm; border: 1px solid black"><tr><td id="qr"></td><td id="nazev" class="text"><br></td></tr><tr><td id="pictograms" colspan="2"></td></tr></table>'
+    var tablestruc;
     var printids = JSON.parse(localStorage["printids"]);
-    localStorage["printids"] = "";
-    if (localStorage["x_dimension"] <= 10) {
-      document.getElementById("labels").innerHTML = "<div id='c0' class='column'></div><div id='c1' class='column'></div>";
-      document.getElementById("labels").className = "row"
-    }
+    //localStorage["printids"] = "";
     for (i = 0; i < printids.length; i++) {
-      if (localStorage["x_dimension"] <= 10) {
-        if (i % 2 == 0) {
-          label_position = "c0";
-        } else {
-          label_position = "c1"
-        }
-      } else {
-        label_position = "labels";
-      }
+      var indlabelheight = localStorage["y_dimension"]*i;
+      tablestruc = '<table id="'+ i +'" class="tabulka" style="top: ' + indlabelheight + 'cm; left: 0cm; width: ' + localStorage["x_dimension"] + 'cm; height: ' + localStorage["y_dimension"] + 'cm;" onclick="selector(this.id)"><tr><td id="qr"></td><td id="nazev" class="text"><br></td></tr><tr><td id="pictograms" colspan="2"></td></tr></table>';
       var x = parsedjson["Chemikalie"][printids[i]];
-      document.getElementById(label_position).innerHTML += tablestruc;
+      document.getElementById("labels").innerHTML += tablestruc;
       var data = {
         nazev: "<p id='nazev'><b>" + x["nazev"] + "</b></p>",
         cistota: "<p>" + x["cistota"] + "<p>",
@@ -89,7 +161,7 @@
       } else {
         document.getElementById("pictograms").remove();
       }      
-      document.getElementById(label_position).innerHTML += "<br>";
+      document.getElementById("labels").innerHTML += "<br>";
 
       if (localStorage["x_dimension"] < 7 || localStorage["y_dimension"] < 6) {
         document.getElementById("poznamkaraw").style = "font-size: 6pt";
@@ -109,7 +181,48 @@
     } else {
       red_location = "index_access.html?index=" + printids[0];
     }
+    
+    selector(0);
 
-    setTimeout(function () { window.print(); }, 500);
-    window.onfocus = function () { setTimeout(function () { window.location.href = red_location; }, 500); }
+    function shiftrec(leftv, topv) {
+      var element = document.getElementById(selected);
+      element.style.top = topv + "cm";
+      element.style.left = leftv + "cm";
+    }
+
+    var selected;
+    function selector(id) {
+      selected = id;
+      var element = document.getElementById(id);
+      for (i = 0; i < printids.length; i++) {
+        document.getElementById(i).className = "tabulka";
+      }
+      element.className = "tabulka selected";
+      localStorage["leftpos"] = element.style.left;
+      localStorage["toppos"] = element.style.top;
+      ipcRenderer.sendToHost("poschanged");
+    }
+
+    function printit() {
+      //escapePrint is not defined
+      for (i = 0; i < printids.length; i++) {
+        document.getElementById(i).className = "tabulka";
+      }
+      window.print();
+    }
+
+    function shiftrecall(wide) {
+      for (i = 0; i < printids.length ; i++) {
+        var element = document.getElementsByClassName("tabulka")[i];
+        var oldleft = element.style.left;
+        oldleft = oldleft.substring(0, oldleft.length - 2);
+        var newleft = parseFloat(oldleft) + wide;
+        if (newleft > 21-localStorage["x_dimension"]) {
+          newleft = 21-localStorage["x_dimension"];
+        } else if (newleft < 0) {
+          newleft = 0;
+        }
+        element.style.left = newleft + "cm";
+      }
+    }
   </script>

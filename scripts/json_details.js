@@ -188,7 +188,7 @@ function print() {
   localStorage["printids"] = JSON.stringify(printids);
   localStorage["x_dimension"] = document.getElementById("width").value;
   localStorage["y_dimension"] = document.getElementById("height").value;
-  window.location.href = "print.html";
+  window.location.href = "alpha.html";
 }
 
 var switches = ["explosive", "flammable", "oxidising", "gasunderpressure", "corrosive", "toxicity", "health", "chronichealth", "environmental"];

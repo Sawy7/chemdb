@@ -1,0 +1,102 @@
+<!doctype html>
+
+<style>
+    body {
+        background: rgb(204,204,204); 
+    }
+    page {
+        background: white;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 0.5cm;
+        box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+    }
+    page[size="A4"] {  
+        width: 21cm;
+        height: 29.7cm; 
+    }
+
+    #tools {
+        position: fixed;
+        top: 104px;
+        padding: 0 .75rem;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    }
+
+    #topv, #botv {
+        position: relative;
+        width: 30px;
+        left: 15px;        
+        text-align: center;
+    }
+
+    #leftslider {
+        top: 25px;
+    }
+
+    #topslider {
+        height: 200px;
+        left: 50%;
+    }
+</style>
+
+<html>
+<head>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link href="css/nouislider.css" rel="stylesheet">
+    <script src="js/nouislider.min.js"></script>
+    <title>ChemDB Print</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav class="grey lighten-3">
+            <div id="params" class="row">
+                <div class="col s3"></div>
+                <div class="input-field col s1">
+                    <input id="leftv" type="text" value="0.00" onkeyup="javascript:shift(0, this.id)">
+                </div>
+                <div class="input-field col s4">
+                    <div id="leftslider"></div>
+                </div>
+                <div class="input-field col s1">
+                    <input id="rightv" type="text" value="0.00" onkeyup="javascript:shift(0, this.id)">
+                </div>
+                <div class="col s3">
+                    <a class="waves-effect waves-light btn blue" href="javascript:printcmd()">Tisk</a>
+                    <a class="waves-effect waves-light btn blue" href="javascript:window.location.href = 'index.html'">Zpět</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <br>
+    <page size="A4">
+        <webview id="foo" src="print.html" style="display:inline-flex; width:21cm; height:29.7cm" nodeintegration id="pageview"></webview>
+    </page>
+    <div id="tools" class="row grey lighten-3">
+        <ul class="left hide-on-med-and-down">
+
+            <input id="topv" type="text" value="0.00" onkeyup="javascript:shift(0, this.id)">
+            <br><br>
+            <div id="topslider"></div>
+            <br>
+            <input id="botv" type="text" value="0.00" onkeyup="javascript:shift(0, this.id)">
+            <br>
+            <a class="waves-effect btn-flat" href="javascript:leftwide()"><i class="material-icons">keyboard_arrow_left</i></a>
+            <br>
+            <a class="waves-effect btn-flat" href="javascript:rightwide()"><i class="material-icons">keyboard_arrow_right</i></a>
+            <br>
+            <a class="waves-effect btn-flat" href="javascript:uphigh()"><i class="material-icons">keyboard_arrow_up</i></a>
+            <br>
+            <a class="waves-effect btn-flat" href="javascript:downhigh()"><i class="material-icons">keyboard_arrow_down</i></a>
+            <br>
+            <!--a class="waves-effect btn-flat"><i class="material-icons">blur_linear</i></a-->
+        </ul>
+    </div>
+    <script src="alpha.js"></script>
+    
+</body>
+</html>
